@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ToT Tracker · Better Diets and Nutrition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,650&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root{
+    --paper:#FBFAF7;
+    --paper-2:#F3F0E9;
+    --card:#FFFFFF;
+    --ink:#1C2B27;
+    --ink-soft:#516560;
+    --line:#E4DFD3;
+    --pine:#2F5D50;
+    --pine-deep:#21433A;
+    --harvest:#D98A3D;
+    --bd:#3E8E7E;   /* Bangladesh */
+    --et:#C9762F;   /* Ethiopia */
+    --vn:#5B7DB1;   /* Vietnam */
+    --m1:#2F5D50;   /* Module 1 */
+    --m2:#C9762F;   /* Module 2 */
+    --m3:#5B7DB1;   /* Module 3 */
+    --radius:14px;
+    --shadow:0 1px 2px rgba(28,43,39,.04), 0 8px 24px rgba(28,43,39,.05);
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Inter",system-ui,sans-serif;line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+
+  /* ---------- header ---------- */
+  header.top{border-bottom:1px solid var(--line);background:var(--paper)}
+  .top-inner{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px;padding:30px 0 22px}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--harvest);margin:0 0 8px}
+  h1{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(26px,3.4vw,40px);line-height:1.05;margin:0;letter-spacing:-.01em}
+  .subtitle{color:var(--ink-soft);font-size:14px;margin:8px 0 0;max-width:54ch}
+  .updated{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-soft);text-align:right;white-space:nowrap}
+  .updated b{color:var(--ink);font-weight:500}
+
+  /* ---------- country filter ---------- */
+  .filterbar{position:sticky;top:0;z-index:20;background:rgba(251,250,247,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .filterbar .wrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-top:12px;padding-bottom:12px}
+  .filter-label{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-right:4px}
+  .tab{font:inherit;font-size:13px;font-weight:500;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);
+    padding:7px 15px;border-radius:999px;cursor:pointer;transition:all .15s ease}
+  .tab:hover{border-color:var(--pine);color:var(--pine)}
+  .tab[aria-pressed="true"]{background:var(--pine);border-color:var(--pine);color:#fff}
+  .tab .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px;vertical-align:middle}
+  .tab:focus-visible{outline:2px solid var(--harvest);outline-offset:2px}
+
+  section{padding:34px 0}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin:0 0 18px}
+  .sec-code{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--harvest);letter-spacing:.08em;padding-top:3px}
+  .sec-title{font-family:"Fraunces",serif;font-weight:550;font-size:21px;margin:0;letter-spacing:-.01em}
+  .sec-note{color:var(--ink-soft);font-size:13px;margin:2px 0 0}
+
+  /* ---------- cascade hero ---------- */
+  .cascade{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch;gap:0;margin-top:6px}
+  .level{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 18px;box-shadow:var(--shadow)}
+  .level .lvl-code{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-soft);letter-spacing:.1em;text-transform:uppercase}
+  .level .lvl-name{font-size:12.5px;color:var(--ink-soft);margin:2px 0 14px;min-height:32px}
+  .level .lvl-total{font-family:"Fraunces",serif;font-weight:600;font-size:46px;line-height:.9;color:var(--pine);letter-spacing:-.02em}
+  .level .lvl-total small{font-family:"Inter",sans-serif;font-weight:500;font-size:13px;color:var(--ink-soft);display:block;margin-top:6px;letter-spacing:0}
+  .minibars{margin-top:16px;display:flex;flex-direction:column;gap:9px}
+  .mb-row{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--ink-soft)}
+  .mb-name{width:74px;flex:none;font-family:"IBM Plex Mono",monospace}
+  .mb-track{flex:1;height:7px;background:var(--paper-2);border-radius:4px;overflow:hidden}
+  .mb-fill{height:100%;border-radius:4px;transition:width .6s cubic-bezier(.2,.7,.3,1)}
+  .mb-val{width:30px;flex:none;text-align:right;font-variant-numeric:tabular-nums;color:var(--ink);font-weight:500}
+  .connector{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 6px;min-width:64px}
+  .connector .mult{font-family:"Fraunces",serif;font-size:17px;color:var(--harvest);font-weight:600}
+  .connector .arrow{color:var(--line);font-size:22px;line-height:1}
+  .connector .mult-lab{font-family:"IBM Plex Mono",monospace;font-size:9px;color:var(--ink-soft);letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
+
+  /* ---------- kpis ---------- */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 18px 16px;box-shadow:var(--shadow)}
+  .kpi .k-code{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--harvest);letter-spacing:.1em}
+  .kpi .k-num{font-family:"Fraunces",serif;font-weight:600;font-size:34px;line-height:1;margin:10px 0 4px;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+  .kpi .k-lab{font-size:12.5px;color:var(--ink-soft)}
+
+  /* ---------- chart grid ---------- */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+  .panel h3{font-family:"Fraunces",serif;font-weight:550;font-size:16px;margin:0 0 2px}
+  .panel .p-code{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--harvest);letter-spacing:.08em}
+  .panel .p-note{color:var(--ink-soft);font-size:12px;margin:2px 0 14px}
+  .chart-box{position:relative;height:280px}
+
+  footer{border-top:1px solid var(--line);background:var(--paper-2);margin-top:20px}
+  footer .wrap{padding:24px 24px 40px;display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:flex-start}
+  footer p{font-size:12px;color:var(--ink-soft);margin:0;max-width:46ch}
+  footer .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--ink-soft)}
+  footer .legend span{display:flex;align-items:center;gap:6px}
+  footer .legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+  .demo-flag{font-family:"IBM Plex Mono",monospace;font-size:10.5px;background:var(--harvest);color:#fff;padding:3px 9px;border-radius:6px;letter-spacing:.05em}
+
+  @media (max-width:860px){
+    .cascade{grid-template-columns:1fr;gap:10px}
+    .connector{flex-direction:row;gap:10px;min-width:0;padding:2px 0}
+    .connector .arrow{transform:rotate(90deg)}
+    .kpis{grid-template-columns:1fr 1fr}
+    .grid2{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .mb-fill{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap top-inner">
+    <div>
+      <p class="eyebrow">Better Diets &amp; Nutrition · CGIAR · CapSha</p>
+      <h1>Training of Trainers Tracker</h1>
+      <p class="subtitle">Food System Transformation for Sustainable Healthy Diets — tracking the reach, effectiveness and anchoring of the ToT cascade across Bangladesh, Ethiopia and Vietnam.</p>
+    </div>
+    <div class="updated">Last updated<br><b>placeholder data</b></div>
+  </div>
+</header>
+
+<div class="filterbar">
+  <div class="wrap">
+    <span class="filter-label">Country</span>
+    <button class="tab" data-country="all" aria-pressed="true">All countries</button>
+    <button class="tab" data-country="bd" aria-pressed="false"><span class="dot" style="background:var(--bd)"></span>Bangladesh</button>
+    <button class="tab" data-country="et" aria-pressed="false"><span class="dot" style="background:var(--et)"></span>Ethiopia</button>
+    <button class="tab" data-country="vn" aria-pressed="false"><span class="dot" style="background:var(--vn)"></span>Vietnam</button>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <!-- HERO: the cascade -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-code">R1 · R1.1–1.3</span>
+      <div>
+        <h2 class="sec-title">The training cascade</h2>
+        <p class="sec-note">Level 1 facilitators (trained by WUR) train Level 2, who train Level 3 — multiplying the pool of trained facilitators.</p>
+      </div>
+    </div>
+    <div class="cascade" id="cascade"><!-- built by JS --></div>
+  </section>
+
+  <!-- KPIs -->
+  <section style="padding-top:8px">
+    <div class="kpis" id="kpis"><!-- built by JS --></div>
+  </section>
+
+  <!-- charts row 1 -->
+  <section>
+    <div class="grid2">
+      <div class="panel">
+        <span class="p-code">R1</span>
+        <h3>Trained facilitators by level</h3>
+        <p class="p-note">Headcount per level, split by gender disaggregation.</p>
+        <div class="chart-box"><canvas id="chFacilitators"></canvas></div>
+      </div>
+      <div class="panel">
+        <span class="p-code">R1 · organisational type</span>
+        <h3>Where facilitators come from</h3>
+        <p class="p-note">Share of trained facilitators by organisation type.</p>
+        <div class="chart-box"><canvas id="chOrg"></canvas></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- charts row 2 -->
+  <section style="padding-top:0">
+    <div class="grid2">
+      <div class="panel">
+        <span class="p-code">E2 · capacity change</span>
+        <h3>Capacity growth by module</h3>
+        <p class="p-note">Average self-assessed capacity (1–5), before vs after the ToT, per core module.</p>
+        <div class="chart-box"><canvas id="chCapacity"></canvas></div>
+      </div>
+      <div class="panel">
+        <span class="p-code">R2 · R3</span>
+        <h3>Subnational reach by level</h3>
+        <p class="p-note">Trainings delivered and participants reached at each level.</p>
+        <div class="chart-box"><canvas id="chReach"></canvas></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><span class="demo-flag">DEMO</span> &nbsp;All figures shown are placeholder data to illustrate the layout. They will be replaced by the live ToT tracker once country coordinators begin uploading records. Indicator codes (R1, E2 …) refer to the CapSha Tracking &amp; Learning Framework.</p>
+    <div class="legend">
+      <span><i style="background:var(--bd)"></i>Bangladesh</span>
+      <span><i style="background:var(--et)"></i>Ethiopia</span>
+      <span><i style="background:var(--vn)"></i>Vietnam</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* =========================================================
+   DATA  — replace this block with data from the ToT tracker.
+   Structure mirrors the indicators in the CapSha framework.
+   ========================================================= */
+const DATA = {
+  countries: {
+    bd: {name:"Bangladesh", color:"#3E8E7E"},
+    et: {name:"Ethiopia",  color:"#C9762F"},
+    vn: {name:"Vietnam",   color:"#5B7DB1"}
+  },
+  // R1 — trained facilitators, by country, by level, split women/men
+  facilitators: {
+    bd:{L1:{w:8, m:10}, L2:{w:29, m:35}, L3:{w:96, m:114}},
+    et:{L1:{w:9, m:13}, L2:{w:24, m:34}, L3:{w:74, m:102}},
+    vn:{L1:{w:7, m:9},  L2:{w:22, m:27}, L3:{w:90, m:98}}
+  },
+  // R1 — organisation type (share of facilitators, all levels)
+  orgTypes: ["Government","University / research","Civil society","Private sector","Multilateral"],
+  org: {
+    bd:[124,92,38,18,12],
+    et:[118,74,40,14,10],
+    vn:[96,88,34,22,9]
+  },
+  // E2 — capacity self-assessment 1–5, pre vs post, by module
+  modules: ["1 · Food system analysis","2 · Multi-stakeholder collaboration","3 · Facilitating change"],
+  capacity: {
+    bd:{pre:[2.4,2.1,2.6], post:[4.1,3.8,4.0]},
+    et:{pre:[2.2,2.3,2.4], post:[3.9,3.7,3.9]},
+    vn:{pre:[2.6,2.2,2.5], post:[4.0,3.9,4.1]}
+  },
+  // R2 trainings + R3 participants, by level
+  reach: {
+    bd:{trainings:{L1:2,L2:9,L3:31}, participants:{L1:18,L2:240,L3:690}},
+    et:{trainings:{L1:2,L2:8,L3:27}, participants:{L1:22,L2:205,L3:560}},
+    vn:{trainings:{L1:2,L2:7,L3:29}, participants:{L1:16,L2:198,L3:640}}
+  }
+};
+
+const CK = ["bd","et","vn"];
+let active = "all"; // current country filter
+
+/* ---------- helpers ---------- */
+const sum = a => a.reduce((x,y)=>x+y,0);
+function pick(country){ return country==="all" ? CK : [country]; }
+function facTotals(country){
+  const ks = pick(country); const out = {L1:{w:0,m:0},L2:{w:0,m:0},L3:{w:0,m:0}};
+  ks.forEach(c=>["L1","L2","L3"].forEach(l=>{out[l].w+=DATA.facilitators[c][l].w; out[l].m+=DATA.facilitators[c][l].m;}));
+  return out;
+}
+const lvlSum = o => o.w+o.m;
+
+/* ---------- hero cascade ---------- */
+const LVL_NAMES = {L1:"National · trained by WUR", L2:"Subnational L2 · trained by L1", L3:"Subnational L3 · trained by L2"};
+function renderCascade(){
+  const t = facTotals(active);
+  const totals = {L1:lvlSum(t.L1),L2:lvlSum(t.L2),L3:lvlSum(t.L3)};
+  const el = document.getElementById("cascade");
+  const cols = ["L1","L2","L3"];
+  let html = "";
+  cols.forEach((lv,i)=>{
+    // per-country mini bars for this level
+    const ks = pick(active);
+    const maxC = Math.max(...CK.map(c=>lvlSum(DATA.facilitators[c][lv])));
+    let mb = "";
+    ks.forEach(c=>{
+      const v = lvlSum(DATA.facilitators[c][lv]);
+      const pct = Math.round(v/maxC*100);
+      mb += `<div class="mb-row"><span class="mb-name">${DATA.countries[c].name.slice(0,8)}</span>
+        <span class="mb-track"><span class="mb-fill" style="width:${pct}%;background:${DATA.countries[c].color}"></span></span>
+        <span class="mb-val">${v}</span></div>`;
+    });
+    html += `<div class="level">
+        <div class="lvl-code">Level ${i+1}</div>
+        <div class="lvl-name">${LVL_NAMES[lv]}</div>
+        <div class="lvl-total">${totals[lv]}<small>trained facilitators</small></div>
+        <div class="minibars">${mb}</div>
+      </div>`;
+    if(i<2){
+      const mult = (totals[cols[i+1]]/totals[lv]).toFixed(1);
+      html += `<div class="connector"><span class="arrow">→</span><span class="mult">×${mult}</span><span class="mult-lab">multiplier</span></div>`;
+    }
+  });
+  el.innerHTML = html;
+}
+
+/* ---------- KPIs ---------- */
+function renderKpis(){
+  const t = facTotals(active);
+  const totalFac = lvlSum(t.L1)+lvlSum(t.L2)+lvlSum(t.L3);
+  const women = t.L1.w+t.L2.w+t.L3.w;
+  const pctW = Math.round(women/totalFac*100);
+  const ks = pick(active);
+  let trainings=0, participants=0;
+  ks.forEach(c=>{ trainings+=sum(Object.values(DATA.reach[c].trainings)); participants+=sum(Object.values(DATA.reach[c].participants)); });
+  const kpis = [
+    {code:"R1",  num:totalFac.toLocaleString(),     lab:"Trained facilitators (all levels)"},
+    {code:"R2",  num:trainings.toLocaleString(),    lab:"ToT trainings conducted"},
+    {code:"R3",  num:participants.toLocaleString(), lab:"Participants reached"},
+    {code:"R1",  num:pctW+"%",                      lab:"Facilitators who are women"}
+  ];
+  document.getElementById("kpis").innerHTML = kpis.map(k=>
+    `<div class="kpi"><div class="k-code">${k.code}</div><div class="k-num">${k.num}</div><div class="k-lab">${k.lab}</div></div>`
+  ).join("");
+}
+
+/* ---------- charts ---------- */
+Chart.defaults.font.family = "Inter, sans-serif";
+Chart.defaults.font.size = 12;
+Chart.defaults.color = "#516560";
+const GRID = "#ECE8DE";
+let charts = {};
+
+function facData(){
+  const t = facTotals(active);
+  return {women:[t.L1.w,t.L2.w,t.L3.w], men:[t.L1.m,t.L2.m,t.L3.m]};
+}
+function orgData(){
+  const ks = pick(active);
+  return DATA.orgTypes.map((_,i)=> sum(ks.map(c=>DATA.org[c][i])));
+}
+function capData(){
+  const ks = pick(active);
+  const avg = key => DATA.modules.map((_,i)=> +(sum(ks.map(c=>DATA.capacity[c][key][i]))/ks.length).toFixed(2));
+  return {pre:avg("pre"), post:avg("post")};
+}
+function reachData(){
+  const ks = pick(active);
+  const part = ["L1","L2","L3"].map(l=> sum(ks.map(c=>DATA.reach[c].participants[l])));
+  const tr   = ["L1","L2","L3"].map(l=> sum(ks.map(c=>DATA.reach[c].trainings[l])));
+  return {part, tr};
+}
+
+function buildCharts(){
+  const f = facData();
+  charts.fac = new Chart(document.getElementById("chFacilitators"),{
+    type:"bar",
+    data:{labels:["Level 1","Level 2","Level 3"],
+      datasets:[
+        {label:"Women",data:f.women,backgroundColor:"#2F5D50",borderRadius:5,maxBarThickness:46},
+        {label:"Men",data:f.men,backgroundColor:"#9DBFB6",borderRadius:5,maxBarThickness:46}
+      ]},
+    options:baseOpts({stacked:true})
+  });
+
+  charts.org = new Chart(document.getElementById("chOrg"),{
+    type:"bar",
+    data:{labels:DATA.orgTypes,
+      datasets:[{data:orgData(),backgroundColor:"#D98A3D",borderRadius:5,maxBarThickness:26}]},
+    options:baseOpts({horizontal:true,legend:false})
+  });
+
+  const c = capData();
+  charts.cap = new Chart(document.getElementById("chCapacity"),{
+    type:"bar",
+    data:{labels:DATA.modules,
+      datasets:[
+        {label:"Before ToT",data:c.pre,backgroundColor:"#D7CFBE",borderRadius:5,maxBarThickness:34},
+        {label:"After ToT",data:c.post,backgroundColor:"#2F5D50",borderRadius:5,maxBarThickness:34}
+      ]},
+    options:baseOpts({max:5})
+  });
+
+  const r = reachData();
+  charts.reach = new Chart(document.getElementById("chReach"),{
+    data:{labels:["Level 1","Level 2","Level 3"],
+      datasets:[
+        {type:"bar",label:"Participants reached",data:r.part,backgroundColor:"#5B7DB1",borderRadius:5,maxBarThickness:46,yAxisID:"y"},
+        {type:"line",label:"Trainings",data:r.tr,borderColor:"#C9762F",backgroundColor:"#C9762F",tension:.3,yAxisID:"y1",pointRadius:4}
+      ]},
+    options:baseOpts({dualAxis:true})
+  });
+}
+
+function baseOpts(o={}){
+  const opt = {
+    responsive:true, maintainAspectRatio:false,
+    animation:{duration: window.matchMedia("(prefers-reduced-motion:reduce)").matches?0:600},
+    plugins:{
+      legend:{display:o.legend!==false, position:"bottom", labels:{boxWidth:12,boxHeight:12,usePointStyle:true,padding:16}},
+      tooltip:{backgroundColor:"#1C2B27",padding:10,cornerRadius:8,titleFont:{family:"Inter"},bodyFont:{family:"Inter"}}
+    },
+    scales:{}
+  };
+  if(o.horizontal){
+    opt.indexAxis="y";
+    opt.scales.x={grid:{color:GRID},border:{display:false},ticks:{precision:0}};
+    opt.scales.y={grid:{display:false},border:{display:false}};
+  }else if(o.dualAxis){
+    opt.scales.x={grid:{display:false},border:{display:false}};
+    opt.scales.y={position:"left",grid:{color:GRID},border:{display:false},title:{display:true,text:"Participants"}};
+    opt.scales.y1={position:"right",grid:{display:false},border:{display:false},title:{display:true,text:"Trainings"}};
+  }else{
+    opt.scales.x={stacked:!!o.stacked,grid:{display:false},border:{display:false}};
+    opt.scales.y={stacked:!!o.stacked,beginAtZero:true,grid:{color:GRID},border:{display:false},
+      max:o.max||undefined,ticks:{precision:0}};
+  }
+  return opt;
+}
+
+function updateCharts(){
+  const f=facData(); charts.fac.data.datasets[0].data=f.women; charts.fac.data.datasets[1].data=f.men; charts.fac.update();
+  charts.org.data.datasets[0].data=orgData(); charts.org.update();
+  const c=capData(); charts.cap.data.datasets[0].data=c.pre; charts.cap.data.datasets[1].data=c.post; charts.cap.update();
+  const r=reachData(); charts.reach.data.datasets[0].data=r.part; charts.reach.data.datasets[1].data=r.tr; charts.reach.update();
+}
+
+/* ---------- filter wiring ---------- */
+document.querySelectorAll(".tab").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll(".tab").forEach(b=>b.setAttribute("aria-pressed","false"));
+    btn.setAttribute("aria-pressed","true");
+    active = btn.dataset.country;
+    renderCascade(); renderKpis(); updateCharts();
+  });
+});
+
+/* ---------- init ---------- */
+renderCascade();
+renderKpis();
+buildCharts();
+</script>
+</body>
+</html>
