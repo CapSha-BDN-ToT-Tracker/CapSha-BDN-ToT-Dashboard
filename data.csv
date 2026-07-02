@@ -1,0 +1,802 @@
+country,level,gender,age_group,org_type,sector
+Ethiopia,L3,Man,Under 35,Civil society,Agriculture & food
+Bangladesh,L3,Man,Under 35,Government,Agriculture & food
+Bangladesh,L3,Woman,35 and over,Government,Environment
+Ethiopia,L3,Woman,Under 35,University & research,Health & nutrition
+Ethiopia,L1,Woman,35 and over,Government,Agriculture & food
+Ethiopia,L2,Woman,Under 35,Civil society,Health & nutrition
+Vietnam,L2,Woman,Under 35,University & research,Agriculture & food
+Vietnam,L3,Man,35 and over,Government,Agriculture & food
+Bangladesh,L2,Man,35 and over,University & research,Health & nutrition
+Vietnam,L1,Woman,35 and over,Civil society,Agriculture & food
+Ethiopia,L1,Man,Under 35,Private sector,Agriculture & food
+Bangladesh,L3,Man,Under 35,Government,Health & nutrition
+Vietnam,L3,Woman,35 and over,Government,Education
+Vietnam,L2,Woman,35 and over,Government,Health & nutrition
+Vietnam,L3,Woman,Under 35,Civil society,Agriculture & food
+Vietnam,L3,Man,35 and over,Private sector,Environment
+Vietnam,L2,Man,35 and over,Government,Environment
+Ethiopia,L3,Man,35 and over,Government,Environment
+Bangladesh,L2,Man,35 and over,Civil society,Agriculture & food
+Vietnam,L3,Man,35 and over,University & research,Agriculture & food
+Ethiopia,L2,Man,35 and over,University & research,Agriculture & food
+Bangladesh,L3,Man,35 and over,Private sector,Education
+Vietnam,L2,Woman,Under 35,Government,Other
+Ethiopia,L2,Man,35 and over,Government,Education
+Bangladesh,L3,Woman,35 and over,Government,Agriculture & food
+Vietnam,L3,Man,Under 35,Government,Environment
+Ethiopia,L3,Woman,Under 35,Civil society,Education
+Ethiopia,L3,Woman,35 and over,Government,Agriculture & food
+Vietnam,L2,Man,35 and over,Government,Health & nutrition
+Vietnam,L3,Man,35 and over,Government,Health & nutrition
+Bangladesh,L3,Man,35 and over,Civil society,Other
+Vietnam,L3,Man,Under 35,Civil society,Education
+Bangladesh,L3,Man,Under 35,Civil society,Health & nutrition
+Bangladesh,L2,Man,Under 35,Civil society,Other
+Vietnam,L3,Woman,35 and over,Government,Agriculture & food
+Ethiopia,L2,Woman,Under 35,Civil society,Industry
+Ethiopia,L2,Man,Under 35,Civil society,Health & nutrition
+Bangladesh,L3,Woman,35 and over,Civil society,Education
+Bangladesh,L3,Woman,Under 35,University & research,Industry
+Vietnam,L3,Woman,35 and over,Government,Health & nutrition
+Ethiopia,L3,Man,35 and over,Government,Environment
+Ethiopia,L3,Man,Under 35,Civil society,Health & nutrition
+Vietnam,L2,Man,35 and over,Government,Agriculture & food
+Ethiopia,L3,Woman,35 and over,Government,Health & nutrition
+Vietnam,L3,Man,Under 35,Government,Environment
+Ethiopia,L3,Man,35 and over,Government,Agriculture & food
+Bangladesh,L3,Man,Under 35,University & research,Agriculture & food
+Bangladesh,L3,Woman,35 and over,Multilateral,Education
+Bangladesh,L2,Man,Under 35,Government,Health & nutrition
+Bangladesh,L3,Man,35 and over,Government,Health & nutrition
+Bangladesh,L3,Man,35 and over,Private sector,Health & nutrition
+Vietnam,L3,Woman,35 and over,University & research,Health & nutrition
+Vietnam,L3,Man,35 and over,Multilateral,Agriculture & food
+Bangladesh,L3,Woman,35 and over,University & research,Industry
+Bangladesh,L3,Man,35 and over,Civil society,Health & nutrition
+Vietnam,L1,Man,Under 35,Government,Health & nutrition
+Vietnam,L3,Woman,35 and over,Government,Education
+Bangladesh,L3,Man,35 and over,Civil society,Education
+Bangladesh,L3,Woman,Under 35,Civil society,Agriculture & food
+Bangladesh,L3,Man,35 and over,University & research,Agriculture & food
+Vietnam,L3,Woman,Under 35,University & research,Education
+Ethiopia,L3,Man,35 and over,Government,Education
+Bangladesh,L3,Man,Under 35,University & research,Education
+Vietnam,L3,Woman,35 and over,University & research,Agriculture & food
+Bangladesh,L3,Woman,35 and over,University & research,Health & nutrition
+Bangladesh,L3,Man,35 and over,Government,Agriculture & food
+Vietnam,L3,Man,Under 35,University & research,Agriculture & food
+Ethiopia,L3,Woman,35 and over,Government,Health & nutrition
+Ethiopia,L3,Woman,Under 35,University & research,Education
+Ethiopia,L2,Man,Under 35,Government,Environment
+Bangladesh,L2,Woman,Under 35,Government,Health & nutrition
+Bangladesh,L3,Man,Under 35,Government,Agriculture & food
+Bangladesh,L3,Woman,35 and over,Government,Agriculture & food
+Bangladesh,L3,Man,Under 35,Government,Other
+Vietnam,L3,Man,Under 35,Government,Industry
+Bangladesh,L2,Woman,35 and over,University & research,Agriculture & food
+Vietnam,L3,Woman,Under 35,Civil society,Agriculture & food
+Vietnam,L3,Man,Under 35,Civil society,Agriculture & food
+Vietnam,L3,Man,Under 35,Private sector,Health & nutrition
+Bangladesh,L3,Man,Under 35,Government,Other
+Vietnam,L3,Woman,35 and over,University & research,Health & nutrition
+Bangladesh,L3,Man,35 and over,Government,Health & nutrition
+Bangladesh,L1,Woman,Under 35,University & research,Agriculture & food
+Bangladesh,L2,Woman,35 and over,Civil society,Agriculture & food
+Bangladesh,L3,Man,35 and over,Multilateral,Industry
+Vietnam,L3,Woman,35 and over,Civil society,Education
+Vietnam,L3,Woman,Under 35,Government,Health & nutrition
+Vietnam,L2,Man,Under 35,Government,Health & nutrition
+Bangladesh,L2,Man,35 and over,University & research,Education
+Ethiopia,L2,Man,Under 35,Government,Environment
+Vietnam,L3,Woman,35 and over,Private sector,Agriculture & food
+Vietnam,L3,Woman,Under 35,University & research,Agriculture & food
+Bangladesh,L3,Man,Under 35,Government,Health & nutrition
+Bangladesh,L2,Woman,Under 35,University & research,Health & nutrition
+Bangladesh,L3,Woman,35 and over,Government,Education
+Ethiopia,L3,Man,35 and over,Private sector,Health & nutrition
+Bangladesh,L3,Man,35 and over,University & research,Agriculture & food
+Bangladesh,L3,Man,35 and over,University & research,Health & nutrition
+Ethiopia,L3,Man,35 and over,University & research,Health & nutrition
+Bangladesh,L2,Man,35 and over,Government,Health & nutrition
+Vietnam,L3,Man,35 and over,University & research,Health & nutrition
+Bangladesh,L3,Man,Under 35,Government,Environment
+Ethiopia,L3,Man,35 and over,Government,Other
+Vietnam,L3,Woman,Under 35,University & research,Other
+Vietnam,L3,Man,Under 35,Private sector,Agriculture & food
+Bangladesh,L1,Woman,Under 35,Government,Environment
+Vietnam,L2,Man,35 and over,University & research,Agriculture & food
+Ethiopia,L2,Woman,Under 35,Civil society,Health & nutrition
+Ethiopia,L2,Woman,Under 35,Multilateral,Health & nutrition
+Ethiopia,L2,Man,35 and over,Government,Agriculture & food
+Ethiopia,L2,Woman,35 and over,Government,Other
+Vietnam,L3,Woman,Under 35,University & research,Education
+Ethiopia,L3,Woman,Under 35,Private sector,Health & nutrition
+Vietnam,L2,Woman,Under 35,Government,Health & nutrition
+Ethiopia,L3,Man,35 and over,Government,Health & nutrition
+Vietnam,L2,Woman,35 and over,Private sector,Health & nutrition
+Ethiopia,L3,Man,Under 35,Government,Education
+Vietnam,L3,Woman,35 and over,Government,Industry
+Bangladesh,L2,Woman,35 and over,Government,Environment
+Bangladesh,L3,Woman,Under 35,Private sector,Other
+Ethiopia,L2,Man,Under 35,University & research,Agriculture & food
+Ethiopia,L3,Man,35 and over,University & research,Education
+Bangladesh,L2,Man,Under 35,Government,Health & nutrition
+Bangladesh,L3,Woman,35 and over,Private sector,Education
+Bangladesh,L3,Man,Under 35,Government,Environment
+Bangladesh,L2,Woman,Under 35,Government,Agriculture & food
+Bangladesh,L3,Man,35 and over,University & research,Health & nutrition
+Bangladesh,L3,Man,Under 35,Government,Agriculture & food
+Vietnam,L2,Man,Under 35,Government,Health & nutrition
+Ethiopia,L3,Woman,35 and over,Government,Agriculture & food
+Bangladesh,L3,Woman,35 and over,University & research,Agriculture & food
+Vietnam,L3,Woman,35 and over,Civil society,Industry
+Vietnam,L2,Man,Under 35,Government,Agriculture & food
+Ethiopia,L3,Man,35 and over,University & research,Education
+Ethiopia,L3,Woman,Under 35,University & research,Agriculture & food
+Bangladesh,L1,Woman,Under 35,University & research,Industry
+Ethiopia,L3,Man,35 and over,University & research,Education
+Vietnam,L3,Man,35 and over,Government,Environment
+Vietnam,L2,Man,Under 35,Government,Agriculture & food
+Vietnam,L3,Man,35 and over,Civil society,Health & nutrition
+Vietnam,L2,Woman,35 and over,Civil society,Agriculture & food
+Ethiopia,L3,Man,35 and over,Multilateral,Health & nutrition
+Vietnam,L3,Man,Under 35,Government,Agriculture & food
+Vietnam,L3,Man,Under 35,Government,Health & nutrition
+Bangladesh,L3,Woman,Under 35,University & research,Other
+Ethiopia,L3,Man,Under 35,Government,Health & nutrition
+Ethiopia,L3,Woman,35 and over,University & research,Agriculture & food
+Vietnam,L3,Man,35 and over,Government,Health & nutrition
+Bangladesh,L2,Woman,Under 35,Government,Environment
+Ethiopia,L3,Man,35 and over,University & research,Agriculture & food
+Vietnam,L1,Woman,35 and over,Civil society,Agriculture & food
+Vietnam,L3,Woman,Under 35,Government,Agriculture & food
+Ethiopia,L3,Woman,35 and over,Government,Education
+Bangladesh,L3,Woman,35 and over,Civil society,Industry
+Bangladesh,L3,Man,Under 35,University & research,Agriculture & food
+Bangladesh,L2,Man,Under 35,Government,Health & nutrition
+Ethiopia,L3,Woman,Under 35,Private sector,Agriculture & food
+Vietnam,L3,Man,35 and over,Civil society,Agriculture & food
+Bangladesh,L2,Man,35 and over,Multilateral,Other
+Bangladesh,L3,Man,35 and over,Multilateral,Other
+Bangladesh,L3,Woman,Under 35,Civil society,Agriculture & food
+Vietnam,L1,Man,35 and over,Private sector,Agriculture & food
+Bangladesh,L2,Woman,35 and over,Government,Health & nutrition
+Bangladesh,L2,Woman,35 and over,University & research,Health & nutrition
+Bangladesh,L3,Man,Under 35,University & research,Agriculture & food
+Vietnam,L2,Man,35 and over,Government,Agriculture & food
+Ethiopia,L3,Woman,Under 35,University & research,Health & nutrition
+Bangladesh,L3,Man,35 and over,Government,Health & nutrition
+Vietnam,L3,Man,35 and over,University & research,Health & nutrition
+Bangladesh,L3,Man,35 and over,Government,Health & nutrition
+Bangladesh,L2,Man,35 and over,Government,Agriculture & food
+Ethiopia,L3,Man,35 and over,Government,Education
+Ethiopia,L3,Woman,35 and over,Multilateral,Health & nutrition
+Ethiopia,L3,Man,Under 35,Government,Education
+Bangladesh,L2,Woman,35 and over,Government,Agriculture & food
+Ethiopia,L1,Man,35 and over,University & research,Health & nutrition
+Vietnam,L1,Woman,Under 35,Government,Other
+Bangladesh,L3,Man,Under 35,Government,Agriculture & food
+Vietnam,L2,Man,35 and over,University & research,Agriculture & food
+Bangladesh,L3,Man,35 and over,Private sector,Health & nutrition
+Ethiopia,L3,Man,35 and over,University & research,Health & nutrition
+Ethiopia,L3,Woman,35 and over,Civil society,Agriculture & food
+Ethiopia,L3,Woman,35 and over,Government,Industry
+Ethiopia,L3,Man,Under 35,University & research,Agriculture & food
+Ethiopia,L3,Man,35 and over,Civil society,Health & nutrition
+Vietnam,L3,Woman,35 and over,Government,Agriculture & food
+Ethiopia,L3,Woman,Under 35,Government,Health & nutrition
+Vietnam,L2,Man,Under 35,University & research,Health & nutrition
+Bangladesh,L3,Man,35 and over,Civil society,Environment
+Vietnam,L3,Woman,Under 35,University & research,Industry
+Vietnam,L3,Man,35 and over,Government,Agriculture & food
+Bangladesh,L2,Man,35 and over,Government,Agriculture & food
+Vietnam,L3,Man,Under 35,Civil society,Education
+Bangladesh,L3,Woman,Under 35,Government,Environment
+Ethiopia,L3,Man,Under 35,University & research,Health & nutrition
+Ethiopia,L3,Woman,Under 35,Government,Health & nutrition
+Bangladesh,L3,Woman,Under 35,Government,Agriculture & food
+Ethiopia,L3,Woman,35 and over,University & research,Environment
+Vietnam,L3,Man,35 and over,Government,Health & nutrition
+Ethiopia,L3,Man,Under 35,Government,Environment
+Bangladesh,L3,Man,Under 35,Government,Environment
+Bangladesh,L3,Woman,Under 35,Government,Environment
+Bangladesh,L2,Man,Under 35,Government,Agriculture & food
+Bangladesh,L3,Man,35 and over,Multilateral,Health & nutrition
+Vietnam,L3,Woman,Under 35,Government,Other
+Vietnam,L3,Man,Under 35,Government,Agriculture & food
+Vietnam,L3,Woman,35 and over,Government,Environment
+Bangladesh,L3,Woman,Under 35,Government,Agriculture & food
+Vietnam,L3,Woman,35 and over,Government,Industry
+Vietnam,L2,Woman,Under 35,University & research,Environment
+Ethiopia,L3,Man,Under 35,Government,Health & nutrition
+Vietnam,L3,Man,35 and over,Government,Environment
+Bangladesh,L3,Man,35 and over,Government,Health & nutrition
+Ethiopia,L3,Man,Under 35,University & research,Health & nutrition
+Bangladesh,L3,Man,Under 35,Multilateral,Agriculture & food
+Bangladesh,L3,Woman,35 and over,Government,Agriculture & food
+Ethiopia,L3,Woman,35 and over,Civil society,Agriculture & food
+Ethiopia,L3,Woman,Under 35,Civil society,Environment
+Bangladesh,L3,Man,35 and over,Government,Education
+Bangladesh,L3,Woman,Under 35,University & research,Health & nutrition
+Vietnam,L2,Man,Under 35,Government,Agriculture & food
+Bangladesh,L3,Man,35 and over,Government,Environment
+Ethiopia,L3,Woman,35 and over,Government,Education
+Bangladesh,L3,Woman,35 and over,Civil society,Health & nutrition
+Vietnam,L3,Woman,35 and over,Government,Health & nutrition
+Bangladesh,L3,Woman,35 and over,University & research,Agriculture & food
+Bangladesh,L3,Man,Under 35,Government,Other
+Ethiopia,L3,Woman,Under 35,Government,Industry
+Ethiopia,L3,Man,35 and over,Civil society,Agriculture & food
+Bangladesh,L3,Man,Under 35,Government,Industry
+Ethiopia,L3,Woman,35 and over,Government,Health & nutrition
+Bangladesh,L3,Woman,35 and over,Private sector,Environment
+Ethiopia,L2,Man,35 and over,Government,Health & nutrition
+Bangladesh,L2,Man,35 and over,Private sector,Environment
+Bangladesh,L2,Woman,35 and over,Private sector,Education
+Vietnam,L3,Woman,Under 35,Government,Health & nutrition
+Ethiopia,L3,Woman,Under 35,Government,Health & nutrition
+Bangladesh,L3,Man,Under 35,Private sector,Agriculture & food
+Ethiopia,L1,Man,Under 35,University & research,Education
+Bangladesh,L3,Man,Under 35,Government,Environment
+Ethiopia,L3,Man,35 and over,Government,Education
+Ethiopia,L3,Woman,35 and over,University & research,Health & nutrition
+Ethiopia,L2,Woman,35 and over,University & research,Agriculture & food
+Bangladesh,L3,Woman,35 and over,Government,Agriculture & food
+Bangladesh,L3,Man,35 and over,Government,Other
+Vietnam,L3,Woman,35 and over,Civil society,Environment
+Ethiopia,L3,Man,35 and over,Government,Agriculture & food
+Bangladesh,L3,Man,35 and over,University & research,Health & nutrition
+Vietnam,L2,Man,35 and over,Government,Agriculture & food
+Bangladesh,L3,Man,35 and over,Government,Education
+Vietnam,L3,Man,Under 35,Government,Industry
+Vietnam,L3,Woman,35 and over,University & research,Environment
+Vietnam,L3,Woman,Under 35,University & research,Agriculture & food
+Bangladesh,L3,Woman,Under 35,Private sector,Agriculture & food
+Bangladesh,L3,Man,35 and over,Private sector,Health & nutrition
+Ethiopia,L2,Woman,35 and over,Government,Environment
+Vietnam,L3,Man,35 and over,Government,Industry
+Bangladesh,L3,Man,35 and over,Government,Agriculture & food
+Vietnam,L3,Man,35 and over,Government,Agriculture & food
+Vietnam,L3,Man,Under 35,University & research,Agriculture & food
+Ethiopia,L3,Woman,35 and over,University & research,Agriculture & food
+Bangladesh,L3,Man,35 and over,Civil society,Education
+Ethiopia,L3,Man,Under 35,Government,Environment
+Vietnam,L3,Woman,Under 35,Multilateral,Other
+Vietnam,L3,Woman,Under 35,University & research,Health & nutrition
+Vietnam,L3,Man,35 and over,University & research,Environment
+Vietnam,L2,Man,35 and over,Government,Agriculture & food
+Bangladesh,L1,Man,35 and over,University & research,Health & nutrition
+Ethiopia,L3,Man,Under 35,University & research,Health & nutrition
+Bangladesh,L3,Woman,35 and over,University & research,Environment
+Vietnam,L3,Woman,Under 35,University & research,Agriculture & food
+Bangladesh,L1,Man,35 and over,University & research,Health & nutrition
+Ethiopia,L2,Man,35 and over,Private sector,Health & nutrition
+Vietnam,L1,Woman,35 and over,Government,Education
+Vietnam,L3,Woman,Under 35,University & research,Agriculture & food
+Bangladesh,L3,Woman,35 and over,Private sector,Education
+Vietnam,L3,Woman,Under 35,Civil society,Agriculture & food
+Ethiopia,L2,Woman,35 and over,Multilateral,Industry
+Vietnam,L3,Man,Under 35,Civil society,Agriculture & food
+Ethiopia,L3,Woman,35 and over,Government,Other
+Ethiopia,L2,Woman,35 and over,University & research,Education
+Ethiopia,L2,Woman,Under 35,University & research,Environment
+Bangladesh,L2,Man,35 and over,Civil society,Health & nutrition
+Bangladesh,L2,Woman,35 and over,Government,Agriculture & food
+Ethiopia,L3,Man,35 and over,Civil society,Agriculture & food
+Bangladesh,L3,Woman,Under 35,University & research,Environment
+Vietnam,L3,Woman,35 and over,University & research,Health & nutrition
+Ethiopia,L3,Man,Under 35,Government,Agriculture & food
+Ethiopia,L2,Man,Under 35,Private sector,Health & nutrition
+Ethiopia,L3,Man,35 and over,Government,Environment
+Ethiopia,L3,Woman,35 and over,Civil society,Environment
+Bangladesh,L3,Man,Under 35,Government,Health & nutrition
+Bangladesh,L2,Woman,35 and over,Multilateral,Education
+Vietnam,L3,Man,Under 35,Government,Agriculture & food
+Ethiopia,L3,Woman,Under 35,Government,Health & nutrition
+Ethiopia,L2,Man,Under 35,University & research,Agriculture & food
+Ethiopia,L3,Man,35 and over,Government,Agriculture & food
+Bangladesh,L3,Woman,35 and over,Government,Agriculture & food
+Ethiopia,L3,Man,Under 35,University & research,Education
+Bangladesh,L3,Man,Under 35,Government,Health & nutrition
+Bangladesh,L3,Woman,35 and over,University & research,Agriculture & food
+Vietnam,L3,Man,35 and over,Civil society,Education
+Ethiopia,L3,Man,35 and over,Civil society,Health & nutrition
+Bangladesh,L3,Woman,35 and over,University & research,Agriculture & food
+Bangladesh,L3,Man,Under 35,Government,Health & nutrition
+Bangladesh,L2,Woman,Under 35,University & research,Agriculture & food
+Bangladesh,L3,Man,35 and over,University & research,Environment
+Ethiopia,L3,Woman,Under 35,Government,Environment
+Ethiopia,L3,Man,35 and over,Government,Agriculture & food
+Ethiopia,L3,Man,35 and over,Government,Agriculture & food
+Vietnam,L3,Man,Under 35,University & research,Education
+Ethiopia,L3,Woman,35 and over,Civil society,Health & nutrition
+Vietnam,L3,Woman,Under 35,University & research,Agriculture & food
+Ethiopia,L3,Man,Under 35,Government,Industry
+Vietnam,L3,Woman,Under 35,Private sector,Other
+Ethiopia,L1,Woman,Under 35,University & research,Agriculture & food
+Vietnam,L1,Man,Under 35,University & research,Education
+Vietnam,L3,Man,Under 35,Government,Health & nutrition
+Vietnam,L2,Man,Under 35,Private sector,Health & nutrition
+Bangladesh,L3,Man,35 and over,Government,Education
+Vietnam,L3,Man,35 and over,Government,Industry
+Bangladesh,L3,Woman,35 and over,Government,Agriculture & food
+Bangladesh,L3,Woman,35 and over,University & research,Environment
+Ethiopia,L2,Woman,35 and over,Government,Health & nutrition
+Ethiopia,L3,Woman,35 and over,Government,Education
+Bangladesh,L2,Woman,Under 35,Government,Health & nutrition
+Ethiopia,L1,Woman,Under 35,University & research,Agriculture & food
+Vietnam,L3,Man,35 and over,University & research,Environment
+Bangladesh,L3,Woman,35 and over,University & research,Health & nutrition
+Vietnam,L3,Woman,Under 35,University & research,Health & nutrition
+Bangladesh,L3,Man,35 and over,Multilateral,Agriculture & food
+Ethiopia,L3,Man,Under 35,Civil society,Industry
+Vietnam,L2,Man,Under 35,Private sector,Education
+Vietnam,L1,Man,35 and over,University & research,Education
+Ethiopia,L3,Man,35 and over,Government,Other
+Bangladesh,L3,Woman,Under 35,Government,Agriculture & food
+Bangladesh,L2,Man,35 and over,Government,Education
+Ethiopia,L3,Man,Under 35,Government,Agriculture & food
+Bangladesh,L3,Man,35 and over,University & research,Health & nutrition
+Vietnam,L3,Man,Under 35,Civil society,Health & nutrition
+Ethiopia,L3,Man,35 and over,Government,Health & nutrition
+Vietnam,L3,Woman,35 and over,Government,Health & nutrition
+Vietnam,L1,Man,35 and over,Private sector,Agriculture & food
+Vietnam,L2,Woman,Under 35,Government,Agriculture & food
+Vietnam,L3,Man,Under 35,University & research,Agriculture & food
+Vietnam,L3,Man,35 and over,Government,Agriculture & food
+Ethiopia,L3,Man,35 and over,University & research,Education
+Bangladesh,L2,Woman,35 and over,Private sector,Education
+Ethiopia,L3,Woman,35 and over,Private sector,Health & nutrition
+Vietnam,L2,Woman,35 and over,University & research,Health & nutrition
+Ethiopia,L3,Man,35 and over,University & research,Agriculture & food
+Bangladesh,L3,Man,35 and over,University & research,Health & nutrition
+Ethiopia,L3,Man,Under 35,Government,Health & nutrition
+Ethiopia,L2,Woman,35 and over,Government,Agriculture & food
+Bangladesh,L3,Man,Under 35,Government,Health & nutrition
+Ethiopia,L3,Man,35 and over,University & research,Agriculture & food
+Bangladesh,L3,Woman,35 and over,Government,Health & nutrition
+Bangladesh,L3,Woman,Under 35,Government,Agriculture & food
+Bangladesh,L2,Woman,Under 35,University & research,Other
+Ethiopia,L2,Man,Under 35,Multilateral,Agriculture & food
+Bangladesh,L2,Man,Under 35,Government,Industry
+Bangladesh,L3,Woman,Under 35,Government,Health & nutrition
+Bangladesh,L3,Woman,Under 35,Government,Agriculture & food
+Bangladesh,L3,Man,Under 35,Government,Agriculture & food
+Bangladesh,L2,Man,35 and over,Government,Health & nutrition
+Vietnam,L3,Man,Under 35,Government,Health & nutrition
+Vietnam,L3,Woman,35 and over,University & research,Health & nutrition
+Ethiopia,L2,Woman,35 and over,University & research,Agriculture & food
+Ethiopia,L3,Man,Under 35,University & research,Health & nutrition
+Bangladesh,L3,Woman,Under 35,Multilateral,Agriculture & food
+Ethiopia,L3,Man,35 and over,Multilateral,Agriculture & food
+Vietnam,L3,Man,Under 35,Government,Health & nutrition
+Ethiopia,L3,Man,35 and over,Government,Environment
+Ethiopia,L2,Man,35 and over,Government,Health & nutrition
+Bangladesh,L2,Man,35 and over,University & research,Health & nutrition
+Ethiopia,L1,Woman,Under 35,Government,Other
+Ethiopia,L3,Woman,35 and over,Government,Agriculture & food
+Ethiopia,L1,Woman,Under 35,Government,Agriculture & food
+Bangladesh,L3,Man,Under 35,Government,Health & nutrition
+Vietnam,L3,Man,35 and over,University & research,Other
+Bangladesh,L3,Woman,Under 35,Government,Health & nutrition
+Ethiopia,L3,Woman,35 and over,Private sector,Agriculture & food
+Vietnam,L3,Woman,35 and over,Private sector,Health & nutrition
+Ethiopia,L3,Woman,Under 35,Civil society,Industry
+Ethiopia,L3,Man,35 and over,University & research,Health & nutrition
+Vietnam,L3,Woman,Under 35,University & research,Agriculture & food
+Ethiopia,L3,Man,35 and over,University & research,Education
+Ethiopia,L2,Man,Under 35,Government,Industry
+Ethiopia,L3,Woman,Under 35,Civil society,Environment
+Bangladesh,L2,Man,35 and over,University & research,Agriculture & food
+Ethiopia,L2,Woman,Under 35,University & research,Agriculture & food
+Bangladesh,L2,Woman,35 and over,Government,Environment
+Vietnam,L3,Man,35 and over,Government,Environment
+Vietnam,L3,Woman,35 and over,Government,Agriculture & food
+Bangladesh,L3,Woman,35 and over,Private sector,Health & nutrition
+Ethiopia,L3,Man,Under 35,Civil society,Agriculture & food
+Vietnam,L2,Woman,35 and over,Government,Health & nutrition
+Bangladesh,L3,Woman,35 and over,University & research,Agriculture & food
+Vietnam,L3,Man,Under 35,Government,Agriculture & food
+Vietnam,L3,Man,35 and over,Civil society,Environment
+Bangladesh,L3,Woman,Under 35,Private sector,Health & nutrition
+Bangladesh,L1,Woman,35 and over,Government,Health & nutrition
+Bangladesh,L3,Woman,35 and over,Government,Environment
+Vietnam,L3,Man,Under 35,Government,Education
+Bangladesh,L3,Man,35 and over,Government,Environment
+Ethiopia,L3,Woman,35 and over,University & research,Education
+Ethiopia,L1,Woman,Under 35,Civil society,Agriculture & food
+Bangladesh,L3,Woman,35 and over,University & research,Health & nutrition
+Bangladesh,L3,Man,Under 35,Government,Agriculture & food
+Ethiopia,L3,Woman,Under 35,University & research,Agriculture & food
+Vietnam,L3,Man,Under 35,Civil society,Agriculture & food
+Bangladesh,L3,Woman,Under 35,University & research,Environment
+Bangladesh,L3,Woman,35 and over,University & research,Health & nutrition
+Ethiopia,L3,Man,35 and over,Private sector,Agriculture & food
+Ethiopia,L2,Woman,Under 35,University & research,Industry
+Ethiopia,L3,Man,35 and over,University & research,Environment
+Bangladesh,L2,Man,35 and over,Private sector,Education
+Bangladesh,L3,Woman,35 and over,University & research,Agriculture & food
+Bangladesh,L3,Woman,Under 35,Government,Health & nutrition
+Vietnam,L3,Man,Under 35,Private sector,Environment
+Vietnam,L3,Woman,35 and over,Government,Environment
+Vietnam,L2,Woman,Under 35,University & research,Industry
+Ethiopia,L3,Woman,35 and over,Civil society,Agriculture & food
+Bangladesh,L3,Man,Under 35,Government,Agriculture & food
+Ethiopia,L1,Man,35 and over,Multilateral,Agriculture & food
+Ethiopia,L3,Man,Under 35,University & research,Agriculture & food
+Vietnam,L3,Man,35 and over,Government,Health & nutrition
+Bangladesh,L3,Man,Under 35,Multilateral,Environment
+Ethiopia,L2,Man,35 and over,University & research,Agriculture & food
+Bangladesh,L2,Man,35 and over,Government,Agriculture & food
+Vietnam,L3,Man,35 and over,University & research,Agriculture & food
+Vietnam,L2,Man,Under 35,Civil society,Environment
+Vietnam,L2,Man,Under 35,Government,Education
+Vietnam,L1,Woman,35 and over,Multilateral,Education
+Ethiopia,L2,Man,35 and over,University & research,Education
+Ethiopia,L2,Woman,35 and over,Government,Agriculture & food
+Vietnam,L3,Man,35 and over,Civil society,Health & nutrition
+Vietnam,L3,Woman,35 and over,University & research,Agriculture & food
+Vietnam,L3,Woman,Under 35,Civil society,Education
+Bangladesh,L2,Woman,35 and over,Government,Industry
+Bangladesh,L2,Woman,Under 35,University & research,Health & nutrition
+Ethiopia,L3,Man,35 and over,Government,Industry
+Vietnam,L3,Man,35 and over,Government,Agriculture & food
+Bangladesh,L1,Man,35 and over,Government,Other
+Vietnam,L3,Man,35 and over,Private sector,Education
+Bangladesh,L3,Man,Under 35,Government,Industry
+Ethiopia,L3,Man,35 and over,Government,Agriculture & food
+Bangladesh,L2,Man,35 and over,University & research,Education
+Ethiopia,L3,Man,35 and over,University & research,Agriculture & food
+Vietnam,L3,Man,35 and over,Government,Industry
+Bangladesh,L1,Woman,Under 35,Civil society,Health & nutrition
+Vietnam,L2,Man,35 and over,Multilateral,Health & nutrition
+Vietnam,L1,Woman,Under 35,University & research,Agriculture & food
+Ethiopia,L3,Woman,Under 35,Government,Health & nutrition
+Ethiopia,L3,Woman,35 and over,University & research,Education
+Ethiopia,L2,Man,Under 35,University & research,Other
+Bangladesh,L3,Man,35 and over,University & research,Environment
+Bangladesh,L3,Woman,35 and over,University & research,Agriculture & food
+Ethiopia,L3,Man,35 and over,University & research,Education
+Ethiopia,L1,Man,35 and over,Private sector,Other
+Vietnam,L3,Woman,Under 35,University & research,Environment
+Ethiopia,L3,Woman,Under 35,Government,Health & nutrition
+Vietnam,L3,Man,35 and over,University & research,Industry
+Ethiopia,L2,Man,35 and over,Government,Health & nutrition
+Vietnam,L2,Man,35 and over,Multilateral,Environment
+Ethiopia,L3,Man,Under 35,University & research,Education
+Vietnam,L3,Woman,Under 35,University & research,Environment
+Bangladesh,L3,Man,35 and over,Multilateral,Health & nutrition
+Bangladesh,L2,Man,35 and over,University & research,Agriculture & food
+Vietnam,L3,Man,35 and over,Civil society,Health & nutrition
+Bangladesh,L3,Woman,35 and over,Government,Health & nutrition
+Ethiopia,L3,Woman,35 and over,Government,Agriculture & food
+Bangladesh,L2,Woman,35 and over,University & research,Agriculture & food
+Vietnam,L3,Woman,35 and over,University & research,Health & nutrition
+Bangladesh,L3,Man,Under 35,Multilateral,Health & nutrition
+Ethiopia,L3,Man,Under 35,Private sector,Education
+Vietnam,L2,Woman,35 and over,Government,Agriculture & food
+Ethiopia,L3,Man,Under 35,University & research,Health & nutrition
+Bangladesh,L3,Man,35 and over,Government,Health & nutrition
+Ethiopia,L1,Woman,35 and over,University & research,Health & nutrition
+Ethiopia,L3,Woman,35 and over,University & research,Environment
+Bangladesh,L1,Man,35 and over,Government,Agriculture & food
+Bangladesh,L3,Man,35 and over,University & research,Health & nutrition
+Vietnam,L3,Man,Under 35,Government,Health & nutrition
+Bangladesh,L3,Woman,Under 35,Government,Health & nutrition
+Bangladesh,L3,Man,Under 35,Government,Agriculture & food
+Bangladesh,L3,Woman,35 and over,Multilateral,Agriculture & food
+Bangladesh,L3,Woman,35 and over,Government,Agriculture & food
+Ethiopia,L2,Man,35 and over,Government,Agriculture & food
+Ethiopia,L3,Man,35 and over,University & research,Agriculture & food
+Ethiopia,L3,Man,35 and over,Civil society,Education
+Bangladesh,L1,Man,Under 35,Government,Environment
+Bangladesh,L2,Man,35 and over,Civil society,Education
+Ethiopia,L1,Man,Under 35,University & research,Health & nutrition
+Vietnam,L3,Woman,35 and over,Government,Agriculture & food
+Vietnam,L3,Woman,Under 35,University & research,Health & nutrition
+Bangladesh,L3,Man,Under 35,Government,Other
+Ethiopia,L3,Man,35 and over,Government,Education
+Vietnam,L3,Woman,35 and over,Private sector,Education
+Vietnam,L3,Woman,Under 35,Multilateral,Health & nutrition
+Ethiopia,L1,Man,Under 35,University & research,Industry
+Ethiopia,L3,Woman,Under 35,Government,Environment
+Bangladesh,L2,Woman,35 and over,Private sector,Agriculture & food
+Bangladesh,L3,Man,35 and over,Government,Agriculture & food
+Vietnam,L3,Man,Under 35,Government,Industry
+Bangladesh,L3,Man,Under 35,Civil society,Health & nutrition
+Ethiopia,L3,Man,35 and over,University & research,Health & nutrition
+Bangladesh,L3,Man,Under 35,Government,Education
+Vietnam,L2,Man,35 and over,Private sector,Education
+Bangladesh,L3,Man,35 and over,Government,Health & nutrition
+Vietnam,L3,Woman,Under 35,Multilateral,Health & nutrition
+Vietnam,L3,Woman,35 and over,Civil society,Education
+Bangladesh,L3,Woman,Under 35,Government,Health & nutrition
+Bangladesh,L3,Man,35 and over,Private sector,Agriculture & food
+Vietnam,L3,Man,Under 35,Government,Health & nutrition
+Ethiopia,L2,Man,Under 35,Civil society,Health & nutrition
+Ethiopia,L3,Woman,35 and over,Civil society,Environment
+Vietnam,L3,Woman,35 and over,Government,Agriculture & food
+Ethiopia,L2,Man,Under 35,Government,Agriculture & food
+Ethiopia,L3,Man,35 and over,University & research,Health & nutrition
+Vietnam,L3,Man,35 and over,Government,Health & nutrition
+Bangladesh,L3,Woman,35 and over,Government,Health & nutrition
+Ethiopia,L3,Woman,Under 35,Government,Other
+Bangladesh,L3,Woman,Under 35,Multilateral,Other
+Bangladesh,L3,Woman,Under 35,Civil society,Health & nutrition
+Ethiopia,L1,Man,35 and over,Government,Agriculture & food
+Ethiopia,L3,Man,Under 35,Civil society,Education
+Bangladesh,L3,Man,35 and over,University & research,Industry
+Bangladesh,L1,Man,35 and over,University & research,Education
+Vietnam,L3,Woman,35 and over,Government,Health & nutrition
+Vietnam,L3,Woman,Under 35,Government,Agriculture & food
+Bangladesh,L2,Man,35 and over,University & research,Health & nutrition
+Bangladesh,L3,Man,Under 35,Government,Health & nutrition
+Ethiopia,L3,Woman,35 and over,Multilateral,Health & nutrition
+Bangladesh,L2,Man,35 and over,Civil society,Health & nutrition
+Ethiopia,L3,Woman,35 and over,University & research,Health & nutrition
+Vietnam,L2,Man,35 and over,Multilateral,Health & nutrition
+Bangladesh,L3,Woman,35 and over,Private sector,Health & nutrition
+Ethiopia,L3,Man,Under 35,Government,Health & nutrition
+Bangladesh,L3,Man,35 and over,Government,Agriculture & food
+Bangladesh,L3,Woman,35 and over,Government,Agriculture & food
+Ethiopia,L3,Woman,Under 35,Government,Health & nutrition
+Vietnam,L2,Man,Under 35,Private sector,Education
+Vietnam,L3,Woman,Under 35,Government,Health & nutrition
+Vietnam,L3,Man,Under 35,Government,Environment
+Vietnam,L3,Man,Under 35,Government,Environment
+Ethiopia,L3,Man,35 and over,University & research,Agriculture & food
+Ethiopia,L3,Man,35 and over,Government,Agriculture & food
+Bangladesh,L3,Woman,35 and over,Government,Agriculture & food
+Vietnam,L3,Woman,35 and over,Government,Environment
+Bangladesh,L2,Man,35 and over,Government,Health & nutrition
+Ethiopia,L3,Woman,35 and over,Government,Industry
+Vietnam,L3,Woman,35 and over,University & research,Health & nutrition
+Ethiopia,L3,Man,Under 35,Government,Agriculture & food
+Vietnam,L3,Man,Under 35,University & research,Agriculture & food
+Vietnam,L1,Woman,35 and over,Government,Agriculture & food
+Bangladesh,L3,Man,35 and over,University & research,Health & nutrition
+Ethiopia,L3,Man,35 and over,Government,Health & nutrition
+Vietnam,L3,Man,35 and over,Private sector,Agriculture & food
+Ethiopia,L3,Man,35 and over,Government,Agriculture & food
+Vietnam,L3,Woman,Under 35,Civil society,Agriculture & food
+Vietnam,L2,Man,35 and over,Government,Agriculture & food
+Bangladesh,L3,Man,35 and over,Private sector,Industry
+Bangladesh,L3,Woman,Under 35,Government,Agriculture & food
+Vietnam,L3,Woman,35 and over,Government,Environment
+Bangladesh,L3,Man,35 and over,Government,Agriculture & food
+Bangladesh,L3,Woman,35 and over,University & research,Health & nutrition
+Vietnam,L3,Man,Under 35,University & research,Health & nutrition
+Bangladesh,L3,Man,35 and over,Government,Agriculture & food
+Bangladesh,L3,Man,35 and over,University & research,Industry
+Vietnam,L3,Woman,Under 35,University & research,Agriculture & food
+Bangladesh,L3,Woman,Under 35,Private sector,Agriculture & food
+Bangladesh,L3,Man,35 and over,University & research,Agriculture & food
+Ethiopia,L3,Woman,Under 35,Government,Agriculture & food
+Ethiopia,L3,Man,35 and over,Civil society,Environment
+Vietnam,L3,Man,Under 35,Multilateral,Health & nutrition
+Ethiopia,L3,Man,35 and over,Government,Health & nutrition
+Ethiopia,L2,Man,Under 35,Private sector,Health & nutrition
+Ethiopia,L3,Woman,Under 35,University & research,Agriculture & food
+Vietnam,L2,Woman,Under 35,Civil society,Education
+Ethiopia,L3,Woman,35 and over,Civil society,Environment
+Bangladesh,L3,Woman,35 and over,University & research,Environment
+Vietnam,L2,Man,35 and over,University & research,Health & nutrition
+Vietnam,L3,Man,35 and over,University & research,Agriculture & food
+Bangladesh,L3,Man,35 and over,Multilateral,Environment
+Bangladesh,L3,Man,35 and over,University & research,Health & nutrition
+Vietnam,L3,Woman,Under 35,University & research,Agriculture & food
+Ethiopia,L3,Man,35 and over,Civil society,Health & nutrition
+Ethiopia,L2,Man,35 and over,University & research,Health & nutrition
+Vietnam,L3,Man,35 and over,University & research,Industry
+Vietnam,L3,Man,Under 35,Government,Agriculture & food
+Ethiopia,L3,Man,35 and over,Civil society,Agriculture & food
+Vietnam,L3,Woman,35 and over,Government,Agriculture & food
+Vietnam,L3,Woman,Under 35,Civil society,Environment
+Vietnam,L2,Woman,35 and over,Private sector,Agriculture & food
+Vietnam,L2,Woman,Under 35,Multilateral,Education
+Ethiopia,L1,Man,35 and over,Civil society,Agriculture & food
+Vietnam,L3,Man,35 and over,Government,Environment
+Vietnam,L3,Man,Under 35,Private sector,Agriculture & food
+Bangladesh,L3,Woman,35 and over,University & research,Agriculture & food
+Ethiopia,L3,Woman,35 and over,Civil society,Agriculture & food
+Vietnam,L3,Man,Under 35,University & research,Agriculture & food
+Ethiopia,L3,Man,35 and over,Government,Education
+Ethiopia,L3,Woman,Under 35,Government,Other
+Ethiopia,L3,Man,35 and over,University & research,Agriculture & food
+Ethiopia,L3,Man,35 and over,Private sector,Agriculture & food
+Ethiopia,L2,Woman,Under 35,Civil society,Education
+Vietnam,L1,Man,35 and over,Government,Environment
+Bangladesh,L3,Woman,35 and over,Government,Agriculture & food
+Ethiopia,L3,Man,35 and over,University & research,Environment
+Bangladesh,L3,Man,Under 35,Government,Health & nutrition
+Vietnam,L2,Woman,35 and over,Civil society,Other
+Ethiopia,L2,Man,35 and over,University & research,Agriculture & food
+Vietnam,L3,Man,35 and over,University & research,Health & nutrition
+Vietnam,L3,Man,35 and over,University & research,Environment
+Bangladesh,L1,Woman,35 and over,Civil society,Health & nutrition
+Ethiopia,L1,Man,Under 35,Government,Environment
+Ethiopia,L3,Woman,Under 35,Government,Industry
+Bangladesh,L3,Woman,Under 35,Government,Environment
+Bangladesh,L3,Man,Under 35,University & research,Agriculture & food
+Bangladesh,L1,Man,35 and over,Government,Agriculture & food
+Ethiopia,L3,Man,35 and over,University & research,Agriculture & food
+Bangladesh,L2,Man,Under 35,Government,Agriculture & food
+Ethiopia,L2,Man,35 and over,Government,Education
+Ethiopia,L3,Woman,35 and over,Government,Agriculture & food
+Ethiopia,L3,Man,Under 35,University & research,Environment
+Bangladesh,L2,Man,Under 35,Government,Education
+Vietnam,L3,Man,35 and over,University & research,Education
+Bangladesh,L3,Man,35 and over,University & research,Health & nutrition
+Bangladesh,L3,Woman,35 and over,University & research,Environment
+Ethiopia,L3,Woman,Under 35,University & research,Health & nutrition
+Ethiopia,L3,Man,35 and over,University & research,Agriculture & food
+Vietnam,L3,Woman,Under 35,Government,Health & nutrition
+Bangladesh,L2,Woman,Under 35,Private sector,Other
+Bangladesh,L1,Woman,Under 35,University & research,Health & nutrition
+Ethiopia,L3,Woman,Under 35,University & research,Agriculture & food
+Bangladesh,L3,Man,Under 35,University & research,Environment
+Bangladesh,L3,Man,35 and over,Government,Health & nutrition
+Ethiopia,L3,Man,35 and over,Private sector,Education
+Ethiopia,L3,Man,Under 35,University & research,Health & nutrition
+Bangladesh,L2,Woman,Under 35,Government,Health & nutrition
+Bangladesh,L3,Woman,35 and over,Private sector,Agriculture & food
+Ethiopia,L3,Woman,35 and over,University & research,Health & nutrition
+Ethiopia,L3,Man,35 and over,University & research,Agriculture & food
+Vietnam,L3,Woman,35 and over,Civil society,Agriculture & food
+Vietnam,L3,Man,Under 35,Civil society,Health & nutrition
+Bangladesh,L3,Man,35 and over,Private sector,Health & nutrition
+Vietnam,L3,Man,Under 35,Private sector,Agriculture & food
+Bangladesh,L3,Woman,35 and over,Private sector,Agriculture & food
+Vietnam,L3,Woman,35 and over,University & research,Agriculture & food
+Vietnam,L2,Man,Under 35,Civil society,Industry
+Vietnam,L3,Woman,35 and over,Government,Health & nutrition
+Vietnam,L3,Man,35 and over,University & research,Health & nutrition
+Bangladesh,L3,Woman,Under 35,Government,Health & nutrition
+Ethiopia,L3,Man,35 and over,University & research,Education
+Ethiopia,L3,Woman,Under 35,University & research,Education
+Ethiopia,L3,Man,Under 35,University & research,Agriculture & food
+Bangladesh,L3,Man,35 and over,Government,Industry
+Bangladesh,L2,Man,35 and over,University & research,Health & nutrition
+Ethiopia,L3,Woman,35 and over,Government,Education
+Vietnam,L3,Woman,Under 35,Government,Health & nutrition
+Vietnam,L2,Woman,35 and over,University & research,Industry
+Bangladesh,L3,Woman,35 and over,Civil society,Other
+Bangladesh,L2,Woman,Under 35,Government,Agriculture & food
+Bangladesh,L2,Man,35 and over,Government,Health & nutrition
+Bangladesh,L3,Man,Under 35,Government,Industry
+Bangladesh,L3,Man,35 and over,Government,Environment
+Ethiopia,L3,Woman,Under 35,Government,Health & nutrition
+Vietnam,L2,Woman,Under 35,Civil society,Industry
+Vietnam,L3,Man,Under 35,Government,Agriculture & food
+Ethiopia,L3,Woman,35 and over,Civil society,Agriculture & food
+Bangladesh,L3,Man,35 and over,University & research,Health & nutrition
+Ethiopia,L2,Woman,35 and over,University & research,Health & nutrition
+Ethiopia,L2,Man,35 and over,Civil society,Agriculture & food
+Vietnam,L3,Woman,35 and over,Government,Agriculture & food
+Bangladesh,L3,Man,Under 35,Civil society,Health & nutrition
+Ethiopia,L3,Woman,35 and over,University & research,Environment
+Ethiopia,L2,Woman,35 and over,Multilateral,Environment
+Vietnam,L3,Woman,Under 35,Civil society,Education
+Ethiopia,L2,Woman,Under 35,Government,Agriculture & food
+Bangladesh,L3,Woman,Under 35,University & research,Agriculture & food
+Vietnam,L3,Man,Under 35,Government,Health & nutrition
+Ethiopia,L3,Man,Under 35,Civil society,Environment
+Vietnam,L3,Woman,Under 35,Civil society,Industry
+Bangladesh,L3,Man,35 and over,Government,Agriculture & food
+Ethiopia,L3,Woman,Under 35,Civil society,Environment
+Ethiopia,L1,Man,Under 35,Government,Industry
+Bangladesh,L3,Woman,35 and over,Government,Environment
+Ethiopia,L3,Woman,Under 35,Government,Environment
+Bangladesh,L2,Woman,Under 35,Government,Environment
+Bangladesh,L2,Woman,Under 35,Government,Agriculture & food
+Bangladesh,L3,Woman,Under 35,University & research,Agriculture & food
+Bangladesh,L2,Man,Under 35,Government,Health & nutrition
+Bangladesh,L3,Man,35 and over,Civil society,Agriculture & food
+Vietnam,L3,Woman,35 and over,Multilateral,Agriculture & food
+Bangladesh,L3,Man,Under 35,Civil society,Industry
+Vietnam,L3,Woman,35 and over,Private sector,Agriculture & food
+Vietnam,L3,Woman,35 and over,University & research,Health & nutrition
+Vietnam,L3,Woman,35 and over,Government,Other
+Ethiopia,L1,Woman,Under 35,University & research,Environment
+Vietnam,L3,Woman,35 and over,Government,Agriculture & food
+Bangladesh,L3,Woman,35 and over,University & research,Agriculture & food
+Ethiopia,L2,Man,35 and over,Private sector,Environment
+Bangladesh,L1,Man,Under 35,Government,Agriculture & food
+Ethiopia,L2,Woman,35 and over,Government,Agriculture & food
+Vietnam,L3,Man,35 and over,Civil society,Agriculture & food
+Bangladesh,L3,Man,35 and over,University & research,Environment
+Vietnam,L3,Man,35 and over,University & research,Other
+Ethiopia,L3,Woman,Under 35,University & research,Agriculture & food
+Ethiopia,L3,Man,35 and over,Government,Agriculture & food
+Vietnam,L3,Woman,35 and over,Private sector,Health & nutrition
+Bangladesh,L3,Woman,35 and over,Government,Health & nutrition
+Bangladesh,L3,Man,Under 35,Government,Health & nutrition
+Vietnam,L2,Woman,Under 35,University & research,Health & nutrition
+Ethiopia,L2,Man,Under 35,Private sector,Health & nutrition
+Bangladesh,L3,Woman,Under 35,Government,Education
+Ethiopia,L3,Man,35 and over,Government,Education
+Vietnam,L3,Man,35 and over,Civil society,Agriculture & food
+Bangladesh,L1,Man,Under 35,Government,Health & nutrition
+Bangladesh,L2,Woman,Under 35,Government,Agriculture & food
+Bangladesh,L2,Man,35 and over,Government,Education
+Vietnam,L2,Woman,35 and over,University & research,Agriculture & food
+Vietnam,L3,Man,35 and over,Government,Environment
+Vietnam,L3,Man,35 and over,Government,Agriculture & food
+Ethiopia,L2,Man,35 and over,Private sector,Health & nutrition
+Vietnam,L2,Woman,Under 35,Government,Health & nutrition
+Ethiopia,L3,Man,Under 35,Government,Agriculture & food
+Vietnam,L3,Man,35 and over,Government,Agriculture & food
+Ethiopia,L2,Woman,35 and over,Government,Agriculture & food
+Bangladesh,L3,Woman,35 and over,University & research,Health & nutrition
+Bangladesh,L3,Woman,Under 35,University & research,Agriculture & food
+Ethiopia,L3,Man,35 and over,University & research,Health & nutrition
+Ethiopia,L2,Woman,35 and over,Civil society,Education
+Vietnam,L3,Man,Under 35,Government,Other
+Bangladesh,L3,Woman,Under 35,Government,Industry
+Bangladesh,L3,Man,35 and over,University & research,Health & nutrition
+Ethiopia,L1,Man,35 and over,Government,Health & nutrition
+Bangladesh,L3,Man,35 and over,Private sector,Agriculture & food
+Bangladesh,L2,Man,35 and over,Multilateral,Agriculture & food
+Bangladesh,L2,Woman,Under 35,Government,Health & nutrition
+Vietnam,L3,Man,Under 35,Government,Education
+Vietnam,L3,Man,35 and over,Government,Health & nutrition
+Ethiopia,L2,Man,35 and over,Government,Health & nutrition
+Bangladesh,L1,Man,35 and over,University & research,Agriculture & food
+Ethiopia,L1,Woman,Under 35,Government,Agriculture & food
+Vietnam,L3,Man,35 and over,Government,Agriculture & food
+Bangladesh,L3,Woman,35 and over,Government,Education
+Bangladesh,L3,Man,Under 35,Government,Agriculture & food
+Ethiopia,L3,Woman,35 and over,University & research,Education
+Ethiopia,L3,Man,Under 35,Multilateral,Agriculture & food
+Vietnam,L3,Woman,35 and over,Government,Industry
+Bangladesh,L3,Woman,35 and over,Government,Education
+Vietnam,L3,Woman,Under 35,Government,Education
+Vietnam,L3,Woman,35 and over,Civil society,Environment
+Bangladesh,L3,Woman,35 and over,Civil society,Other
+Ethiopia,L3,Woman,Under 35,Government,Health & nutrition
+Vietnam,L1,Man,Under 35,Civil society,Education
+Bangladesh,L3,Woman,Under 35,Government,Agriculture & food
+Vietnam,L3,Woman,Under 35,Civil society,Health & nutrition
+Ethiopia,L2,Man,35 and over,Government,Health & nutrition
+Bangladesh,L3,Man,35 and over,Government,Environment
+Vietnam,L2,Woman,35 and over,Government,Agriculture & food
+Vietnam,L2,Man,Under 35,Government,Industry
+Bangladesh,L3,Woman,Under 35,University & research,Agriculture & food
+Vietnam,L3,Man,35 and over,University & research,Agriculture & food
+Vietnam,L3,Man,Under 35,University & research,Health & nutrition
+Ethiopia,L1,Man,Under 35,University & research,Environment
+Vietnam,L3,Man,35 and over,University & research,Agriculture & food
+Ethiopia,L2,Man,Under 35,Government,Agriculture & food
+Vietnam,L3,Woman,35 and over,Government,Health & nutrition
+Bangladesh,L3,Woman,Under 35,Government,Health & nutrition
+Ethiopia,L3,Man,35 and over,Civil society,Agriculture & food
+Vietnam,L3,Man,35 and over,University & research,Industry
+Ethiopia,L3,Man,35 and over,Government,Agriculture & food
+Bangladesh,L1,Woman,35 and over,Government,Other
+Bangladesh,L3,Man,Under 35,Government,Agriculture & food
+Vietnam,L3,Man,Under 35,Government,Agriculture & food
+Bangladesh,L3,Man,Under 35,Private sector,Education
+Ethiopia,L3,Man,Under 35,Government,Agriculture & food
+Vietnam,L3,Woman,35 and over,University & research,Health & nutrition
+Ethiopia,L3,Man,35 and over,University & research,Environment
+Vietnam,L3,Man,35 and over,Government,Health & nutrition
+Vietnam,L3,Woman,35 and over,University & research,Health & nutrition
+Bangladesh,L3,Woman,35 and over,Government,Other
+Bangladesh,L3,Woman,Under 35,Government,Health & nutrition
+Ethiopia,L2,Woman,35 and over,Government,Health & nutrition
+Vietnam,L3,Woman,Under 35,University & research,Education
+Bangladesh,L3,Man,35 and over,Government,Agriculture & food
+Bangladesh,L3,Woman,35 and over,Private sector,Environment
+Ethiopia,L3,Woman,35 and over,University & research,Agriculture & food
+Ethiopia,L2,Man,Under 35,Government,Health & nutrition
+Ethiopia,L2,Man,35 and over,Government,Environment
+Bangladesh,L3,Woman,35 and over,Private sector,Health & nutrition
+Bangladesh,L2,Man,Under 35,Government,Health & nutrition
+Bangladesh,L3,Man,35 and over,Civil society,Health & nutrition
+Bangladesh,L3,Man,35 and over,Civil society,Education
+Vietnam,L1,Man,35 and over,Private sector,Education
+Bangladesh,L3,Man,Under 35,Government,Other
+Vietnam,L3,Woman,Under 35,University & research,Environment
+Bangladesh,L3,Woman,Under 35,University & research,Health & nutrition
+Vietnam,L1,Man,35 and over,Government,Education
