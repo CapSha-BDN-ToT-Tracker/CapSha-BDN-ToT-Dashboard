@@ -8,425 +8,466 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,650&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 <style>
   :root{
-    --paper:#FBFAF7;
-    --paper-2:#F3F0E9;
-    --card:#FFFFFF;
-    --ink:#1C2B27;
-    --ink-soft:#516560;
-    --line:#E4DFD3;
-    --pine:#2F5D50;
-    --pine-deep:#21433A;
-    --harvest:#D98A3D;
-    --bd:#3E8E7E;   /* Bangladesh */
-    --et:#C9762F;   /* Ethiopia */
-    --vn:#5B7DB1;   /* Vietnam */
-    --m1:#2F5D50;   /* Module 1 */
-    --m2:#C9762F;   /* Module 2 */
-    --m3:#5B7DB1;   /* Module 3 */
-    --radius:14px;
-    --shadow:0 1px 2px rgba(28,43,39,.04), 0 8px 24px rgba(28,43,39,.05);
+    --paper:#FBFAF7;--paper-2:#F3F0E9;--card:#FFFFFF;--ink:#1C2B27;--ink-soft:#516560;--line:#E4DFD3;
+    --pine:#2F5D50;--harvest:#D98A3D;
+    --bd:#3E8E7E;--et:#C9762F;--vn:#5B7DB1;
+    --d-reach:#2F5D50;--d-eff:#C4762E;--d-sus:#3E6B8B;--d-rel:#8A5A7A;
+    --bar-h:60px;--radius:14px;--shadow:0 1px 2px rgba(28,43,39,.04),0 10px 28px rgba(28,43,39,.06);
   }
   *{box-sizing:border-box}
-  html{-webkit-text-size-adjust:100%}
-  body{
-    margin:0;background:var(--paper);color:var(--ink);
-    font-family:"Inter",system-ui,sans-serif;line-height:1.5;
-    -webkit-font-smoothing:antialiased;
-  }
+  html,body{margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:"Inter",system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
   .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
 
-  /* ---------- header ---------- */
-  header.top{border-bottom:1px solid var(--line);background:var(--paper)}
-  .top-inner{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px;padding:30px 0 22px}
-  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--harvest);margin:0 0 8px}
-  h1{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(26px,3.4vw,40px);line-height:1.05;margin:0;letter-spacing:-.01em}
-  .subtitle{color:var(--ink-soft);font-size:14px;margin:8px 0 0;max-width:54ch}
-  .updated{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-soft);text-align:right;white-space:nowrap}
-  .updated b{color:var(--ink);font-weight:500}
-
-  /* ---------- country filter ---------- */
-  .filterbar{position:sticky;top:0;z-index:20;background:rgba(251,250,247,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-  .filterbar .wrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-top:12px;padding-bottom:12px}
-  .filter-label{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-right:4px}
-  .tab{font:inherit;font-size:13px;font-weight:500;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);
-    padding:7px 15px;border-radius:999px;cursor:pointer;transition:all .15s ease}
+  /* ---------- fixed top bar ---------- */
+  #topbar{position:fixed;top:0;left:0;right:0;height:var(--bar-h);z-index:100;
+    display:flex;align-items:center;gap:16px;padding:0 24px;
+    background:rgba(251,250,247,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .brand{display:flex;align-items:center;gap:10px;cursor:pointer;border:0;background:none;font:inherit;color:var(--ink);padding:0}
+  .brand .mark{width:26px;height:26px;border-radius:7px;background:var(--pine);flex:none;position:relative}
+  .brand .mark::after{content:"";position:absolute;inset:7px 7px auto auto;width:8px;height:8px;border-radius:50%;background:var(--harvest)}
+  .brand b{font-family:"Fraunces",serif;font-weight:600;font-size:15px;letter-spacing:-.01em}
+  .brand .crumb{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-soft)}
+  .bar-right{margin-left:auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+  .tab{font:inherit;font-size:12.5px;font-weight:500;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);
+    padding:6px 12px;border-radius:999px;cursor:pointer;transition:all .15s ease}
   .tab:hover{border-color:var(--pine);color:var(--pine)}
   .tab[aria-pressed="true"]{background:var(--pine);border-color:var(--pine);color:#fff}
-  .tab .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px;vertical-align:middle}
+  .tab .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:middle}
   .tab:focus-visible{outline:2px solid var(--harvest);outline-offset:2px}
+  .csvbtn{font-size:12px;color:var(--ink-soft);border:1px dashed var(--line);padding:6px 11px;border-radius:999px;cursor:pointer;transition:all .15s}
+  .csvbtn:hover{border-color:var(--pine);color:var(--pine)}
+  #csvfile{position:absolute;width:1px;height:1px;opacity:0}
 
-  section{padding:34px 0}
-  .sec-head{display:flex;align-items:baseline;gap:12px;margin:0 0 18px}
-  .sec-code{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--harvest);letter-spacing:.08em;padding-top:3px}
-  .sec-title{font-family:"Fraunces",serif;font-weight:550;font-size:21px;margin:0;letter-spacing:-.01em}
-  .sec-note{color:var(--ink-soft);font-size:13px;margin:2px 0 0}
+  /* ---------- home: snap scroller ---------- */
+  #home{height:100dvh;overflow-y:auto;scroll-snap-type:y mandatory;scroll-behavior:smooth}
+  .snap{min-height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;display:flex;flex-direction:column;
+    justify-content:center;padding:calc(var(--bar-h) + 28px) 24px 40px}
+  .snap-inner{max-width:1180px;margin:0 auto;width:100%}
+  .hero-eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--harvest);margin:0 0 10px}
+  .hero-title{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(28px,4vw,46px);line-height:1.03;margin:0;letter-spacing:-.015em;max-width:16ch}
+  .hero-sub{color:var(--ink-soft);font-size:15px;margin:12px 0 0;max-width:60ch}
 
-  /* ---------- cascade hero ---------- */
-  .cascade{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch;gap:0;margin-top:6px}
+  .domains{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:34px}
+  .dcard{position:relative;border:0;text-align:left;cursor:pointer;color:#fff;border-radius:18px;padding:26px 26px 22px;
+    min-height:172px;display:flex;flex-direction:column;font:inherit;overflow:hidden;
+    box-shadow:var(--shadow);transition:transform .18s ease,box-shadow .18s ease}
+  .dcard:hover{transform:translateY(-3px);box-shadow:0 16px 36px rgba(28,43,39,.14)}
+  .dcard:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+  .dcard .dc-code{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;opacity:.85}
+  .dcard .dc-name{font-family:"Fraunces",serif;font-weight:600;font-size:27px;margin:8px 0 6px;letter-spacing:-.01em}
+  .dcard .dc-blurb{font-size:13px;line-height:1.5;opacity:.92;max-width:38ch}
+  .dcard .dc-go{margin-top:auto;font-size:12.5px;font-weight:500;opacity:.9;display:flex;align-items:center;gap:6px;padding-top:14px}
+  .dcard .dc-dim{position:absolute;top:22px;right:24px;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
+
+  .scroll-hint{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:30px;color:var(--ink-soft);font-size:12.5px}
+  .scroll-hint .chev{animation:bob 1.8s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+
+  .ov-head{display:flex;align-items:baseline;gap:12px;margin:0 0 20px}
+  .ov-code{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--harvest);letter-spacing:.08em;padding-top:3px}
+  .ov-title{font-family:"Fraunces",serif;font-weight:550;font-size:22px;margin:0;letter-spacing:-.01em}
+  .ov-note{color:var(--ink-soft);font-size:13px;margin:2px 0 0}
+
+  /* ---------- cascade ---------- */
+  .cascade{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch}
   .level{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 18px;box-shadow:var(--shadow)}
   .level .lvl-code{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-soft);letter-spacing:.1em;text-transform:uppercase}
   .level .lvl-name{font-size:12.5px;color:var(--ink-soft);margin:2px 0 14px;min-height:32px}
-  .level .lvl-total{font-family:"Fraunces",serif;font-weight:600;font-size:46px;line-height:.9;color:var(--pine);letter-spacing:-.02em}
-  .level .lvl-total small{font-family:"Inter",sans-serif;font-weight:500;font-size:13px;color:var(--ink-soft);display:block;margin-top:6px;letter-spacing:0}
-  .minibars{margin-top:16px;display:flex;flex-direction:column;gap:9px}
+  .level .lvl-total{font-family:"Fraunces",serif;font-weight:600;font-size:44px;line-height:.9;color:var(--pine);letter-spacing:-.02em}
+  .level .lvl-total small{font-family:"Inter",sans-serif;font-weight:500;font-size:12.5px;color:var(--ink-soft);display:block;margin-top:6px}
+  .minibars{margin-top:15px;display:flex;flex-direction:column;gap:9px}
   .mb-row{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--ink-soft)}
   .mb-name{width:74px;flex:none;font-family:"IBM Plex Mono",monospace}
   .mb-track{flex:1;height:7px;background:var(--paper-2);border-radius:4px;overflow:hidden}
   .mb-fill{height:100%;border-radius:4px;transition:width .6s cubic-bezier(.2,.7,.3,1)}
   .mb-val{width:30px;flex:none;text-align:right;font-variant-numeric:tabular-nums;color:var(--ink);font-weight:500}
-  .connector{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 6px;min-width:64px}
+  .connector{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 6px;min-width:60px}
   .connector .mult{font-family:"Fraunces",serif;font-size:17px;color:var(--harvest);font-weight:600}
   .connector .arrow{color:var(--line);font-size:22px;line-height:1}
   .connector .mult-lab{font-family:"IBM Plex Mono",monospace;font-size:9px;color:var(--ink-soft);letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
+  .placeholder{background:var(--card);border:1px dashed var(--line);border-radius:var(--radius);padding:28px;color:var(--ink-soft);font-size:13.5px;text-align:center}
 
-  /* ---------- kpis ---------- */
-  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-  .kpi{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 18px 16px;box-shadow:var(--shadow)}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:18px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
   .kpi .k-code{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--harvest);letter-spacing:.1em}
-  .kpi .k-num{font-family:"Fraunces",serif;font-weight:600;font-size:34px;line-height:1;margin:10px 0 4px;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
-  .kpi .k-lab{font-size:12.5px;color:var(--ink-soft)}
+  .kpi .k-num{font-family:"Fraunces",serif;font-weight:600;font-size:32px;line-height:1;margin:10px 0 4px;font-variant-numeric:tabular-nums}
+  .kpi .k-lab{font-size:12px;color:var(--ink-soft)}
 
-  /* ---------- chart grid ---------- */
+  /* ---------- domain view ---------- */
+  #domainView{display:none;min-height:100dvh;padding-top:var(--bar-h)}
+  .dhead{--dc:var(--pine);background:var(--dc);color:#fff;padding:40px 0 34px}
+  .dhead .back{background:rgba(255,255,255,.16);border:0;color:#fff;font:inherit;font-size:12.5px;padding:6px 13px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:background .15s}
+  .dhead .back:hover{background:rgba(255,255,255,.28)}
+  .dhead .d-dim{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.8;margin:18px 0 0}
+  .dhead h2{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(26px,3.6vw,40px);margin:6px 0 0;letter-spacing:-.015em}
+  .dhead .d-q{font-size:14.5px;opacity:.93;margin:12px 0 0;max-width:70ch}
+  .dbody{padding:34px 0 60px}
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
   .panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
   .panel h3{font-family:"Fraunces",serif;font-weight:550;font-size:16px;margin:0 0 2px}
   .panel .p-code{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--harvest);letter-spacing:.08em}
   .panel .p-note{color:var(--ink-soft);font-size:12px;margin:2px 0 14px}
   .chart-box{position:relative;height:280px}
+  .subhead{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin:38px 0 14px}
 
-  footer{border-top:1px solid var(--line);background:var(--paper-2);margin-top:20px}
-  footer .wrap{padding:24px 24px 40px;display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:flex-start}
-  footer p{font-size:12px;color:var(--ink-soft);margin:0;max-width:46ch}
-  footer .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--ink-soft)}
-  footer .legend span{display:flex;align-items:center;gap:6px}
-  footer .legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
-  .demo-flag{font-family:"IBM Plex Mono",monospace;font-size:10.5px;background:var(--harvest);color:#fff;padding:3px 9px;border-radius:6px;letter-spacing:.05em}
+  .ind{display:flex;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:12px}
+  .ind-code{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;color:#fff;background:var(--dc,var(--pine));border-radius:7px;padding:3px 9px;height:fit-content;flex:none}
+  .ind-title{font-weight:600;font-size:14.5px;margin:1px 0 3px}
+  .ind-def{font-size:13px;color:var(--ink-soft);line-height:1.5}
+  .ind-src{font-size:11.5px;color:var(--ink-soft);margin-top:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .chip{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:999px}
+  .chip-await{background:#F3ECDD;color:#8a6a2f}
+  .chip-live{background:#E4F0EB;color:#2F5D50}
 
-  @media (max-width:860px){
-    .cascade{grid-template-columns:1fr;gap:10px}
-    .connector{flex-direction:row;gap:10px;min-width:0;padding:2px 0}
+  footer{border-top:1px solid var(--line);background:var(--paper-2)}
+  footer .wrap{padding:22px 24px 34px;display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:flex-start}
+  footer p{font-size:12px;color:var(--ink-soft);margin:0;max-width:52ch}
+  footer code{font-family:"IBM Plex Mono",monospace}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--ink-soft)}
+  .legend span{display:flex;align-items:center;gap:6px}
+  .legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+
+  .banner{display:none;background:#FCF3E7;border:1px solid #EBD3B0;color:#8a5a1f;font-size:12.5px;padding:9px 14px;border-radius:10px;margin-bottom:18px}
+  .banner.show{display:block}
+  .banner b{font-weight:600}
+  .banner code{font-family:"IBM Plex Mono",monospace}
+
+  @media (max-width:820px){
+    .domains{grid-template-columns:1fr}
+    .cascade{grid-template-columns:1fr}
+    .connector{flex-direction:row;gap:10px;min-width:0;padding:4px 0}
     .connector .arrow{transform:rotate(90deg)}
     .kpis{grid-template-columns:1fr 1fr}
     .grid2{grid-template-columns:1fr}
+    .snap{min-height:auto;padding-top:calc(var(--bar-h) + 24px)}
+    #home{scroll-snap-type:none}
   }
   @media (prefers-reduced-motion:reduce){
-    .mb-fill{transition:none}
+    .mb-fill,.dcard{transition:none}.scroll-hint .chev{animation:none}#home{scroll-behavior:auto}
   }
 </style>
 </head>
 <body>
 
-<header class="top">
-  <div class="wrap top-inner">
-    <div>
-      <p class="eyebrow">Better Diets &amp; Nutrition · CGIAR · CapSha</p>
-      <h1>Training of Trainers Tracker</h1>
-      <p class="subtitle">Food System Transformation for Sustainable Healthy Diets — tracking the reach, effectiveness and anchoring of the ToT cascade across Bangladesh, Ethiopia and Vietnam.</p>
-    </div>
-    <div class="updated">Last updated<br><b>placeholder data</b></div>
-  </div>
-</header>
-
-<div class="filterbar">
-  <div class="wrap">
-    <span class="filter-label">Country</span>
-    <button class="tab" data-country="all" aria-pressed="true">All countries</button>
+<div id="topbar">
+  <button class="brand" id="brandHome" title="Home">
+    <span class="mark"></span>
+    <span><b>CapSha ToT</b> <span class="crumb" id="crumb"></span></span>
+  </button>
+  <div class="bar-right">
+    <button class="tab" data-country="all" aria-pressed="true">All</button>
     <button class="tab" data-country="bd" aria-pressed="false"><span class="dot" style="background:var(--bd)"></span>Bangladesh</button>
     <button class="tab" data-country="et" aria-pressed="false"><span class="dot" style="background:var(--et)"></span>Ethiopia</button>
     <button class="tab" data-country="vn" aria-pressed="false"><span class="dot" style="background:var(--vn)"></span>Vietnam</button>
+    <label class="csvbtn" for="csvfile" title="Preview a CSV from your computer">Preview CSV…</label>
+    <input type="file" id="csvfile" accept=".csv,text/csv">
   </div>
 </div>
 
-<main class="wrap">
-
-  <!-- HERO: the cascade -->
-  <section>
-    <div class="sec-head">
-      <span class="sec-code">R1 · R1.1–1.3</span>
-      <div>
-        <h2 class="sec-title">The training cascade</h2>
-        <p class="sec-note">Level 1 facilitators (trained by WUR) train Level 2, who train Level 3 — multiplying the pool of trained facilitators.</p>
-      </div>
-    </div>
-    <div class="cascade" id="cascade"><!-- built by JS --></div>
-  </section>
-
-  <!-- KPIs -->
-  <section style="padding-top:8px">
-    <div class="kpis" id="kpis"><!-- built by JS --></div>
-  </section>
-
-  <!-- charts row 1 -->
-  <section>
-    <div class="grid2">
-      <div class="panel">
-        <span class="p-code">R1</span>
-        <h3>Trained facilitators by level</h3>
-        <p class="p-note">Headcount per level, split by gender disaggregation.</p>
-        <div class="chart-box"><canvas id="chFacilitators"></canvas></div>
-      </div>
-      <div class="panel">
-        <span class="p-code">R1 · organisational type</span>
-        <h3>Where facilitators come from</h3>
-        <p class="p-note">Share of trained facilitators by organisation type.</p>
-        <div class="chart-box"><canvas id="chOrg"></canvas></div>
-      </div>
+<!-- ================= HOME ================= -->
+<div id="home">
+  <section class="snap">
+    <div class="snap-inner">
+      <p class="hero-eyebrow">Better Diets &amp; Nutrition · CGIAR · CapSha</p>
+      <h1 class="hero-title">Training of Trainers — four domains of impact</h1>
+      <p class="hero-sub">Choose a country above, then open a domain to explore the data. Scroll down for a programme overview.</p>
+      <div class="domains" id="domainCards"></div>
+      <div class="scroll-hint"><span>Programme overview</span><span class="chev">↓</span></div>
     </div>
   </section>
 
-  <!-- charts row 2 -->
-  <section style="padding-top:0">
-    <div class="grid2">
-      <div class="panel">
-        <span class="p-code">E2 · capacity change</span>
-        <h3>Capacity growth by module</h3>
-        <p class="p-note">Average self-assessed capacity (1–5), before vs after the ToT, per core module.</p>
-        <div class="chart-box"><canvas id="chCapacity"></canvas></div>
+  <section class="snap" style="background:var(--paper-2)">
+    <div class="snap-inner">
+      <div id="previewBanner" class="banner"></div>
+      <div class="ov-head">
+        <span class="ov-code">R1</span>
+        <div>
+          <h2 class="ov-title">Programme at a glance</h2>
+          <p class="ov-note">The training cascade and headline reach figures for the current country selection.</p>
+        </div>
       </div>
-      <div class="panel">
-        <span class="p-code">R2 · R3</span>
-        <h3>Subnational reach by level</h3>
-        <p class="p-note">Trainings delivered and participants reached at each level.</p>
-        <div class="chart-box"><canvas id="chReach"></canvas></div>
-      </div>
+      <div class="cascade" id="ovCascade"></div>
+      <div class="kpis" id="ovKpis"></div>
+      <div class="scroll-hint" style="margin-top:26px"><span>Open a domain above for the full picture</span></div>
     </div>
   </section>
-</main>
+</div>
 
-<footer>
-  <div class="wrap">
-    <p><span class="demo-flag">DEMO</span> &nbsp;All figures shown are placeholder data to illustrate the layout. They will be replaced by the live ToT tracker once country coordinators begin uploading records. Indicator codes (R1, E2 …) refer to the CapSha Tracking &amp; Learning Framework.</p>
+<!-- ================= DOMAIN VIEW ================= -->
+<div id="domainView">
+  <div class="dhead" id="dhead">
+    <div class="wrap">
+      <button class="back" id="backBtn">← All domains</button>
+      <div class="d-dim" id="dDim"></div>
+      <h2 id="dName"></h2>
+      <p class="d-q" id="dQ"></p>
+    </div>
+  </div>
+  <div class="dbody"><div class="wrap" id="domainBody"></div></div>
+  <footer><div class="wrap">
+    <p>Reach figures read live from <code>data.csv</code>. Other domains populate as their survey and log data are added. Do not put names or personal identifiers in public data files.</p>
     <div class="legend">
       <span><i style="background:var(--bd)"></i>Bangladesh</span>
       <span><i style="background:var(--et)"></i>Ethiopia</span>
       <span><i style="background:var(--vn)"></i>Vietnam</span>
     </div>
-  </div>
-</footer>
+  </div></footer>
+</div>
 
 <script>
-/* =========================================================
-   DATA  — replace this block with data from the ToT tracker.
-   Structure mirrors the indicators in the CapSha framework.
-   ========================================================= */
-const DATA = {
-  countries: {
-    bd: {name:"Bangladesh", color:"#3E8E7E"},
-    et: {name:"Ethiopia",  color:"#C9762F"},
-    vn: {name:"Vietnam",   color:"#5B7DB1"}
-  },
-  // R1 — trained facilitators, by country, by level, split women/men
-  facilitators: {
-    bd:{L1:{w:8, m:10}, L2:{w:29, m:35}, L3:{w:96, m:114}},
-    et:{L1:{w:9, m:13}, L2:{w:24, m:34}, L3:{w:74, m:102}},
-    vn:{L1:{w:7, m:9},  L2:{w:22, m:27}, L3:{w:90, m:98}}
-  },
-  // R1 — organisation type (share of facilitators, all levels)
-  orgTypes: ["Government","University / research","Civil society","Private sector","Multilateral"],
-  org: {
-    bd:[124,92,38,18,12],
-    et:[118,74,40,14,10],
-    vn:[96,88,34,22,9]
-  },
-  // E2 — capacity self-assessment 1–5, pre vs post, by module
-  modules: ["1 · Food system analysis","2 · Multi-stakeholder collaboration","3 · Facilitating change"],
-  capacity: {
-    bd:{pre:[2.4,2.1,2.6], post:[4.1,3.8,4.0]},
-    et:{pre:[2.2,2.3,2.4], post:[3.9,3.7,3.9]},
-    vn:{pre:[2.6,2.2,2.5], post:[4.0,3.9,4.1]}
-  },
-  // R2 trainings + R3 participants, by level
-  reach: {
-    bd:{trainings:{L1:2,L2:9,L3:31}, participants:{L1:18,L2:240,L3:690}},
-    et:{trainings:{L1:2,L2:8,L3:27}, participants:{L1:22,L2:205,L3:560}},
-    vn:{trainings:{L1:2,L2:7,L3:29}, participants:{L1:16,L2:198,L3:640}}
-  }
+/* ---------------- domain configuration ---------------- */
+const DOMAINS={
+  reach:{name:"Reach",color:"var(--d-reach)",dim:"Scalability",codes:"R1–R5",
+    q:"What is the outreach of the ToT programme roll-out across national and subnational levels?",
+    blurb:"How many facilitators are trained, how many trainings run, and how far the ToT content spreads.",
+    indicators:[
+      {code:"R2",title:"Subnational trainings conducted",def:"Number of ToT trainings delivered by trained facilitators, by level (R2.1–R2.3).",src:"Training log sheet"},
+      {code:"R3",title:"Participants reached",def:"Total participants reached through subnational trainings, disaggregated by gender (R3.1–R3.3).",src:"Training log sheet"},
+      {code:"R4",title:"Projects & programmes using ToT content",def:"Projects and programmes applying ToT module content, and their thematic areas.",src:"6-monthly stocktake survey"},
+      {code:"R5",title:"Awareness, advocacy & influencing events",def:"Number and type of events using ToT content, topics targeted and modules used.",src:"Event log · stocktake survey"}
+    ]},
+  effectiveness:{name:"Effectiveness",color:"var(--d-eff)",dim:"Quality",codes:"E1–E6",
+    q:"How effectively does the ToT meet a country's capacity needs to implement its food-system-transformation roadmap?",
+    blurb:"Whether the modules build the right knowledge and skills, and how those are put into practice.",
+    indicators:[
+      {code:"E1",title:"Does the ToT meet capacity needs?",def:"Trained facilitators' perspective on whether the ToT meets the country's capacity needs.",src:"Stocktake survey"},
+      {code:"E2",title:"Change in individual capacity scores",def:"Pre- and post-ToT self-assessment on the specific capacities strengthened.",src:"Pre/post ToT survey"},
+      {code:"E3",title:"ToT practices applied",def:"Coaching & mentoring, contextual adaptation, and skill/knowledge support applied in roll-out.",src:"Practice documentation"},
+      {code:"E4",title:"Adapted materials developed",def:"Number of adapted training materials or modules developed for local delivery.",src:"Stocktake survey"},
+      {code:"E5",title:"Core module elements retained",def:"Local materials incorporate the food-system analysis, collaboration and change elements of ToT L1.",src:"Training register checklist"},
+      {code:"E6",title:"Didactic approach retained",def:"Local delivery keeps the L1 didactic approach and intended learning outcomes per module.",src:"Didactic alignment checklist"}
+    ]},
+  sustainability:{name:"Sustainability",color:"var(--d-sus)",dim:"Anchoring",codes:"S1–S6",
+    q:"To what extent are ToT capacities anchored in facilitators, their organisations and partnerships beyond the programme?",
+    blurb:"Whether collaboration, application, motivation and peer learning continue after the training.",
+    indicators:[
+      {code:"S1",title:"Collaborative actions",def:"Number and type of joint initiatives, MSP activities and co-facilitation linked to the ToT.",src:"Collaborative action log"},
+      {code:"S2",title:"Capacities applied in daily practice",def:"Share of facilitators applying ToT capacities in their day-to-day professional work.",src:"Stocktake survey"},
+      {code:"S3",title:"Facilitator motivation",def:"Trained facilitators' motivation levels to keep delivering ToT sessions.",src:"Stocktake · coaching sessions"},
+      {code:"S4",title:"Retention post-ToT",def:"Share of trained facilitators still active across tracks 1, 2 and/or 3 after training.",src:"Stocktake survey"},
+      {code:"S5",title:"Follow-up peer-coaching sessions",def:"Number of peer coaching and sharing sessions organised by the facilitator pool.",src:"Peer support session log"},
+      {code:"S6",title:"Topics discussed in peer support",def:"Themes and questions raised in peer support groups and online exchanges.",src:"Peer support session log"}
+    ]},
+  relevance:{name:"Relevance",color:"var(--d-rel)",dim:"Contextualization",codes:"C1–C4",
+    q:"Are facilitators equipped to contextualise the curriculum across scales, locations and audiences, and make it fit for purpose?",
+    blurb:"Whether the curriculum fits local needs and leaves facilitators prepared for what comes next.",
+    indicators:[
+      {code:"C1",title:"Positive feedback on relevance",def:"Share of subnational participants rating the curriculum relevant to their local context.",src:"Post-training survey"},
+      {code:"C2",title:"Ability to localise the curriculum",def:"Share of trainers demonstrating they can adapt the curriculum to local needs.",src:"Facilitator self-reflection form"},
+      {code:"C3",title:"Equipped to roll out the roadmap",def:"Share of facilitators who feel adequately equipped to roll out the FST roadmap.",src:"Post-training survey"},
+      {code:"C4",title:"Additional capacities needed",def:"Type and frequency of further capacities facilitators say they still require.",src:"Capacity gap mapping form"}
+    ]}
 };
+const DVAR={reach:"--d-reach",effectiveness:"--d-eff",sustainability:"--d-sus",relevance:"--d-rel"};
 
-const CK = ["bd","et","vn"];
-let active = "all"; // current country filter
+/* ---------------- data layer (Reach / R1) ---------------- */
+const COUNTRY_MAP={bangladesh:"bd",ethiopia:"et",vietnam:"vn",bd:"bd",et:"et",vn:"vn"};
+const COUNTRY={bd:{name:"Bangladesh",color:"#3E8E7E"},et:{name:"Ethiopia",color:"#C9762F"},vn:{name:"Vietnam",color:"#5B7DB1"}};
+const LEVELS=["L1","L2","L3"];
+const LVL_NAMES={L1:"National · trained by WUR",L2:"Subnational L2 · trained by L1",L3:"Subnational L3 · trained by L2"};
+const ORG_ORDER=["Government","University & research","Civil society","Private sector","Multilateral"];
+const SECTOR_ORDER=["Health & nutrition","Agriculture & food","Environment","Education","Industry","Other"];
 
-/* ---------- helpers ---------- */
-const sum = a => a.reduce((x,y)=>x+y,0);
-function pick(country){ return country==="all" ? CK : [country]; }
-function facTotals(country){
-  const ks = pick(country); const out = {L1:{w:0,m:0},L2:{w:0,m:0},L3:{w:0,m:0}};
-  ks.forEach(c=>["L1","L2","L3"].forEach(l=>{out[l].w+=DATA.facilitators[c][l].w; out[l].m+=DATA.facilitators[c][l].m;}));
-  return out;
+let ROWS=[], active="all", currentView="home", reachCharts={};
+
+const low=s=>(s||"").toString().trim().toLowerCase();
+function cleanRow(r){
+  const get=k=>{for(const key in r){if(low(key)===k)return r[key];}return "";};
+  const c=COUNTRY_MAP[low(get("country"))];
+  let lvl=low(get("level")).replace(/[^0-9]/g,""); lvl=lvl?("L"+lvl):"";
+  if(!c||!LEVELS.includes(lvl))return null;
+  const g=low(get("gender")); const gender=(g.startsWith("w")||g.startsWith("f"))?"Woman":(g?"Man":"");
+  const a=low(get("age_group")); const age=(a.includes("under")||a.includes("<")||a.includes("below"))?"Under 35":"35 and over";
+  const match=(val,list)=>{const v=low(val);return list.find(o=>low(o)===v)||list.find(o=>v&&low(o).startsWith(v.slice(0,4)))||"Other";};
+  return {country:c,level:lvl,gender,age,org:match(get("org_type"),ORG_ORDER),sector:match(get("sector"),SECTOR_ORDER)};
 }
-const lvlSum = o => o.w+o.m;
+const rowsFor=()=>active==="all"?ROWS:ROWS.filter(r=>r.country===active);
+function countBy(rows,fn,keys){const m=Object.fromEntries(keys.map(k=>[k,0]));rows.forEach(r=>{const k=fn(r);if(k in m)m[k]++;});return m;}
 
-/* ---------- hero cascade ---------- */
-const LVL_NAMES = {L1:"National · trained by WUR", L2:"Subnational L2 · trained by L1", L3:"Subnational L3 · trained by L2"};
-function renderCascade(){
-  const t = facTotals(active);
-  const totals = {L1:lvlSum(t.L1),L2:lvlSum(t.L2),L3:lvlSum(t.L3)};
-  const el = document.getElementById("cascade");
-  const cols = ["L1","L2","L3"];
-  let html = "";
-  cols.forEach((lv,i)=>{
-    // per-country mini bars for this level
-    const ks = pick(active);
-    const maxC = Math.max(...CK.map(c=>lvlSum(DATA.facilitators[c][lv])));
-    let mb = "";
-    ks.forEach(c=>{
-      const v = lvlSum(DATA.facilitators[c][lv]);
-      const pct = Math.round(v/maxC*100);
-      mb += `<div class="mb-row"><span class="mb-name">${DATA.countries[c].name.slice(0,8)}</span>
-        <span class="mb-track"><span class="mb-fill" style="width:${pct}%;background:${DATA.countries[c].color}"></span></span>
-        <span class="mb-val">${v}</span></div>`;
-    });
-    html += `<div class="level">
-        <div class="lvl-code">Level ${i+1}</div>
-        <div class="lvl-name">${LVL_NAMES[lv]}</div>
-        <div class="lvl-total">${totals[lv]}<small>trained facilitators</small></div>
-        <div class="minibars">${mb}</div>
-      </div>`;
-    if(i<2){
-      const mult = (totals[cols[i+1]]/totals[lv]).toFixed(1);
-      html += `<div class="connector"><span class="arrow">→</span><span class="mult">×${mult}</span><span class="mult-lab">multiplier</span></div>`;
-    }
+/* ---------- HTML builders (shared by overview + reach) ---------- */
+function cascadeHTML(){
+  if(!ROWS.length)return `<div class="placeholder" style="grid-column:1/-1">No data loaded yet. Use <b>Preview CSV…</b> to load a file, or add <code>data.csv</code> to the repository.</div>`;
+  const rows=rowsFor();
+  const tot=lv=>rows.filter(r=>r.level===lv).length;
+  const totals={L1:tot("L1"),L2:tot("L2"),L3:tot("L3")};
+  const ks=active==="all"?Object.keys(COUNTRY):[active];
+  let h="";
+  LEVELS.forEach((lv,i)=>{
+    const maxC=Math.max(1,...Object.keys(COUNTRY).map(c=>ROWS.filter(r=>r.country===c&&r.level===lv).length));
+    let mb="";
+    ks.forEach(c=>{const v=ROWS.filter(r=>r.country===c&&r.level===lv).length;
+      mb+=`<div class="mb-row"><span class="mb-name">${COUNTRY[c].name.slice(0,8)}</span>
+        <span class="mb-track"><span class="mb-fill" style="width:${Math.round(v/maxC*100)}%;background:${COUNTRY[c].color}"></span></span>
+        <span class="mb-val">${v}</span></div>`;});
+    h+=`<div class="level"><div class="lvl-code">Level ${i+1}</div><div class="lvl-name">${LVL_NAMES[lv]}</div>
+      <div class="lvl-total">${totals[lv]}<small>trained facilitators</small></div>
+      <div class="minibars">${mb}</div></div>`;
+    if(i<2){const m=totals[lv]?(totals[LEVELS[i+1]]/totals[lv]).toFixed(1):"–";
+      h+=`<div class="connector"><span class="arrow">→</span><span class="mult">×${m}</span><span class="mult-lab">multiplier</span></div>`;}
   });
-  el.innerHTML = html;
+  return h;
 }
-
-/* ---------- KPIs ---------- */
-function renderKpis(){
-  const t = facTotals(active);
-  const totalFac = lvlSum(t.L1)+lvlSum(t.L2)+lvlSum(t.L3);
-  const women = t.L1.w+t.L2.w+t.L3.w;
-  const pctW = Math.round(women/totalFac*100);
-  const ks = pick(active);
-  let trainings=0, participants=0;
-  ks.forEach(c=>{ trainings+=sum(Object.values(DATA.reach[c].trainings)); participants+=sum(Object.values(DATA.reach[c].participants)); });
-  const kpis = [
-    {code:"R1",  num:totalFac.toLocaleString(),     lab:"Trained facilitators (all levels)"},
-    {code:"R2",  num:trainings.toLocaleString(),    lab:"ToT trainings conducted"},
-    {code:"R3",  num:participants.toLocaleString(), lab:"Participants reached"},
-    {code:"R1",  num:pctW+"%",                      lab:"Facilitators who are women"}
+function kpisHTML(){
+  const rows=rowsFor(),n=rows.length;
+  const pct=x=>n?Math.round(x/n*100)+"%":"–";
+  const K=[
+    {n:n?n.toLocaleString():"–",l:"Trained facilitators (all levels)"},
+    {n:pct(rows.filter(r=>r.gender==="Woman").length),l:"Facilitators who are women"},
+    {n:pct(rows.filter(r=>r.age==="Under 35").length),l:"Facilitators under 35"},
+    {n:pct(rows.filter(r=>r.org==="Government"||r.org==="University & research").length),l:"Government, university or research"}
   ];
-  document.getElementById("kpis").innerHTML = kpis.map(k=>
-    `<div class="kpi"><div class="k-code">${k.code}</div><div class="k-num">${k.num}</div><div class="k-lab">${k.lab}</div></div>`
-  ).join("");
+  return K.map(k=>`<div class="kpi"><div class="k-code">R1</div><div class="k-num">${k.n}</div><div class="k-lab">${k.l}</div></div>`).join("");
 }
 
-/* ---------- charts ---------- */
-Chart.defaults.font.family = "Inter, sans-serif";
-Chart.defaults.font.size = 12;
-Chart.defaults.color = "#516560";
-const GRID = "#ECE8DE";
-let charts = {};
+/* ---------- chart data ---------- */
+function levelData(){const rows=rowsFor();const f=lv=>({w:rows.filter(r=>r.level===lv&&r.gender==="Woman").length,m:rows.filter(r=>r.level===lv&&r.gender==="Man").length});const a=f("L1"),b=f("L2"),c=f("L3");return {women:[a.w,b.w,c.w],men:[a.m,b.m,c.m]};}
+function orgData(){const m=countBy(rowsFor(),r=>r.org,ORG_ORDER);return ORG_ORDER.map(k=>m[k]);}
+function sectorData(){const m=countBy(rowsFor(),r=>r.sector,SECTOR_ORDER);return SECTOR_ORDER.map(k=>m[k]);}
+function ageData(){const rows=rowsFor();const f=g=>LEVELS.map(lv=>rows.filter(r=>r.level===lv&&r.age===g).length);return {under:f("Under 35"),over:f("35 and over")};}
 
-function facData(){
-  const t = facTotals(active);
-  return {women:[t.L1.w,t.L2.w,t.L3.w], men:[t.L1.m,t.L2.m,t.L3.m]};
-}
-function orgData(){
-  const ks = pick(active);
-  return DATA.orgTypes.map((_,i)=> sum(ks.map(c=>DATA.org[c][i])));
-}
-function capData(){
-  const ks = pick(active);
-  const avg = key => DATA.modules.map((_,i)=> +(sum(ks.map(c=>DATA.capacity[c][key][i]))/ks.length).toFixed(2));
-  return {pre:avg("pre"), post:avg("post")};
-}
-function reachData(){
-  const ks = pick(active);
-  const part = ["L1","L2","L3"].map(l=> sum(ks.map(c=>DATA.reach[c].participants[l])));
-  const tr   = ["L1","L2","L3"].map(l=> sum(ks.map(c=>DATA.reach[c].trainings[l])));
-  return {part, tr};
-}
-
-function buildCharts(){
-  const f = facData();
-  charts.fac = new Chart(document.getElementById("chFacilitators"),{
-    type:"bar",
-    data:{labels:["Level 1","Level 2","Level 3"],
-      datasets:[
-        {label:"Women",data:f.women,backgroundColor:"#2F5D50",borderRadius:5,maxBarThickness:46},
-        {label:"Men",data:f.men,backgroundColor:"#9DBFB6",borderRadius:5,maxBarThickness:46}
-      ]},
-    options:baseOpts({stacked:true})
-  });
-
-  charts.org = new Chart(document.getElementById("chOrg"),{
-    type:"bar",
-    data:{labels:DATA.orgTypes,
-      datasets:[{data:orgData(),backgroundColor:"#D98A3D",borderRadius:5,maxBarThickness:26}]},
-    options:baseOpts({horizontal:true,legend:false})
-  });
-
-  const c = capData();
-  charts.cap = new Chart(document.getElementById("chCapacity"),{
-    type:"bar",
-    data:{labels:DATA.modules,
-      datasets:[
-        {label:"Before ToT",data:c.pre,backgroundColor:"#D7CFBE",borderRadius:5,maxBarThickness:34},
-        {label:"After ToT",data:c.post,backgroundColor:"#2F5D50",borderRadius:5,maxBarThickness:34}
-      ]},
-    options:baseOpts({max:5})
-  });
-
-  const r = reachData();
-  charts.reach = new Chart(document.getElementById("chReach"),{
-    data:{labels:["Level 1","Level 2","Level 3"],
-      datasets:[
-        {type:"bar",label:"Participants reached",data:r.part,backgroundColor:"#5B7DB1",borderRadius:5,maxBarThickness:46,yAxisID:"y"},
-        {type:"line",label:"Trainings",data:r.tr,borderColor:"#C9762F",backgroundColor:"#C9762F",tension:.3,yAxisID:"y1",pointRadius:4}
-      ]},
-    options:baseOpts({dualAxis:true})
-  });
-}
-
+Chart.defaults.font.family="Inter, sans-serif";Chart.defaults.font.size=12;Chart.defaults.color="#516560";
+const GRID="#ECE8DE";const reduce=window.matchMedia("(prefers-reduced-motion:reduce)").matches;
 function baseOpts(o={}){
-  const opt = {
-    responsive:true, maintainAspectRatio:false,
-    animation:{duration: window.matchMedia("(prefers-reduced-motion:reduce)").matches?0:600},
-    plugins:{
-      legend:{display:o.legend!==false, position:"bottom", labels:{boxWidth:12,boxHeight:12,usePointStyle:true,padding:16}},
-      tooltip:{backgroundColor:"#1C2B27",padding:10,cornerRadius:8,titleFont:{family:"Inter"},bodyFont:{family:"Inter"}}
-    },
-    scales:{}
-  };
-  if(o.horizontal){
-    opt.indexAxis="y";
-    opt.scales.x={grid:{color:GRID},border:{display:false},ticks:{precision:0}};
-    opt.scales.y={grid:{display:false},border:{display:false}};
-  }else if(o.dualAxis){
-    opt.scales.x={grid:{display:false},border:{display:false}};
-    opt.scales.y={position:"left",grid:{color:GRID},border:{display:false},title:{display:true,text:"Participants"}};
-    opt.scales.y1={position:"right",grid:{display:false},border:{display:false},title:{display:true,text:"Trainings"}};
-  }else{
-    opt.scales.x={stacked:!!o.stacked,grid:{display:false},border:{display:false}};
-    opt.scales.y={stacked:!!o.stacked,beginAtZero:true,grid:{color:GRID},border:{display:false},
-      max:o.max||undefined,ticks:{precision:0}};
-  }
+  const opt={responsive:true,maintainAspectRatio:false,animation:{duration:reduce?0:600},
+    plugins:{legend:{display:o.legend!==false,position:"bottom",labels:{boxWidth:12,boxHeight:12,usePointStyle:true,padding:16}},
+      tooltip:{backgroundColor:"#1C2B27",padding:10,cornerRadius:8}},scales:{}};
+  if(o.horizontal){opt.indexAxis="y";opt.scales.x={grid:{color:GRID},border:{display:false},ticks:{precision:0}};opt.scales.y={grid:{display:false},border:{display:false}};}
+  else{opt.scales.x={stacked:!!o.stacked,grid:{display:false},border:{display:false}};opt.scales.y={stacked:!!o.stacked,beginAtZero:true,grid:{color:GRID},border:{display:false},ticks:{precision:0}};}
   return opt;
 }
-
-function updateCharts(){
-  const f=facData(); charts.fac.data.datasets[0].data=f.women; charts.fac.data.datasets[1].data=f.men; charts.fac.update();
-  charts.org.data.datasets[0].data=orgData(); charts.org.update();
-  const c=capData(); charts.cap.data.datasets[0].data=c.pre; charts.cap.data.datasets[1].data=c.post; charts.cap.update();
-  const r=reachData(); charts.reach.data.datasets[0].data=r.part; charts.reach.data.datasets[1].data=r.tr; charts.reach.update();
+function destroyReachCharts(){Object.values(reachCharts).forEach(c=>c&&c.destroy());reachCharts={};}
+function buildReachCharts(){
+  destroyReachCharts();
+  const l=levelData();
+  reachCharts.level=new Chart(document.getElementById("chLevel"),{type:"bar",data:{labels:["Level 1","Level 2","Level 3"],datasets:[
+    {label:"Women",data:l.women,backgroundColor:"#2F5D50",borderRadius:5,maxBarThickness:46},
+    {label:"Men",data:l.men,backgroundColor:"#9DBFB6",borderRadius:5,maxBarThickness:46}]},options:baseOpts({stacked:true})});
+  reachCharts.org=new Chart(document.getElementById("chOrg"),{type:"bar",data:{labels:ORG_ORDER,datasets:[{data:orgData(),backgroundColor:"#D98A3D",borderRadius:5,maxBarThickness:26}]},options:baseOpts({horizontal:true,legend:false})});
+  reachCharts.sector=new Chart(document.getElementById("chSector"),{type:"bar",data:{labels:SECTOR_ORDER,datasets:[{data:sectorData(),backgroundColor:"#5B7DB1",borderRadius:5,maxBarThickness:24}]},options:baseOpts({horizontal:true,legend:false})});
+  const a=ageData();
+  reachCharts.age=new Chart(document.getElementById("chAge"),{type:"bar",data:{labels:["Level 1","Level 2","Level 3"],datasets:[
+    {label:"Under 35",data:a.under,backgroundColor:"#2F5D50",borderRadius:5,maxBarThickness:46},
+    {label:"35 and over",data:a.over,backgroundColor:"#D7CFBE",borderRadius:5,maxBarThickness:46}]},options:baseOpts({stacked:true})});
 }
 
-/* ---------- filter wiring ---------- */
-document.querySelectorAll(".tab").forEach(btn=>{
-  btn.addEventListener("click",()=>{
-    document.querySelectorAll(".tab").forEach(b=>b.setAttribute("aria-pressed","false"));
-    btn.setAttribute("aria-pressed","true");
-    active = btn.dataset.country;
-    renderCascade(); renderKpis(); updateCharts();
-  });
+/* ---------- landing cards ---------- */
+function renderCards(){
+  document.getElementById("domainCards").innerHTML=Object.entries(DOMAINS).map(([key,d])=>
+    `<button class="dcard" style="background:${d.color}" data-domain="${key}">
+      <span class="dc-code">${d.codes}</span>
+      <span class="dc-dim">${d.dim}</span>
+      <span class="dc-name">${d.name}</span>
+      <span class="dc-blurb">${d.blurb}</span>
+      <span class="dc-go">Explore ${d.name} →</span>
+    </button>`).join("");
+  document.querySelectorAll(".dcard").forEach(b=>b.addEventListener("click",()=>openDomain(b.dataset.domain)));
+}
+
+/* ---------- domain body ---------- */
+function indicatorHTML(list,await_=true){
+  return list.map(i=>`<div class="ind">
+      <span class="ind-code">${i.code}</span>
+      <div><div class="ind-title">${i.title}</div><div class="ind-def">${i.def}</div>
+      <div class="ind-src">Source: ${i.src} <span class="chip ${await_?"chip-await":"chip-live"}">${await_?"awaiting data":"live"}</span></div></div>
+    </div>`).join("");
+}
+function reachBodyHTML(){
+  return `
+    <div class="ov-head"><span class="ov-code">R1 · R1.1–1.3</span><div>
+      <h2 class="ov-title">The training cascade</h2>
+      <p class="ov-note">Level 1 (trained by WUR) train Level 2, who train Level 3 — multiplying the pool of facilitators.</p></div></div>
+    <div class="cascade" id="rCascade"></div>
+    <div class="kpis" id="rKpis"></div>
+    <div class="subhead">Who is trained · R1 disaggregation</div>
+    <div class="grid2">
+      <div class="panel"><span class="p-code">R1 · gender</span><h3>Facilitators by level</h3><p class="p-note">Headcount per level, split by gender.</p><div class="chart-box"><canvas id="chLevel"></canvas></div></div>
+      <div class="panel"><span class="p-code">R1 · organisation type</span><h3>Where facilitators come from</h3><p class="p-note">Trained facilitators by organisation type.</p><div class="chart-box"><canvas id="chOrg"></canvas></div></div>
+    </div>
+    <div class="grid2" style="margin-top:22px">
+      <div class="panel"><span class="p-code">R1 · thematic sector</span><h3>Sectors represented</h3><p class="p-note">Trained facilitators by thematic sector.</p><div class="chart-box"><canvas id="chSector"></canvas></div></div>
+      <div class="panel"><span class="p-code">R1 · age</span><h3>Age profile across the cascade</h3><p class="p-note">Share under vs over 35, by level.</p><div class="chart-box"><canvas id="chAge"></canvas></div></div>
+    </div>
+    <div class="subhead">More reach indicators · added as their data arrives</div>
+    ${indicatorHTML(DOMAINS.reach.indicators,true)}`;
+}
+function openDomain(key){
+  const d=DOMAINS[key];currentView=key;
+  document.getElementById("dhead").style.setProperty("--dc",`var(${DVAR[key]})`);
+  document.getElementById("dDim").textContent=d.dim+" · "+d.codes;
+  document.getElementById("dName").textContent=d.name;
+  document.getElementById("dQ").textContent=d.q;
+  document.getElementById("crumb").textContent="/ "+d.name;
+  const body=document.getElementById("domainBody");
+  body.style.setProperty("--dc",`var(${DVAR[key]})`);
+  if(key==="reach"){
+    body.innerHTML=reachBodyHTML();
+    document.getElementById("rCascade").innerHTML=cascadeHTML();
+    document.getElementById("rKpis").innerHTML=kpisHTML();
+    if(ROWS.length)buildReachCharts(); else destroyReachCharts();
+  }else{
+    body.innerHTML=`<div class="subhead">Indicators in this domain</div>${indicatorHTML(d.indicators,true)}
+      <div class="placeholder" style="margin-top:8px">Charts for ${d.name} will appear here once the matching survey and log data are added as their own CSV — the same upload pattern as Reach.</div>`;
+  }
+  document.getElementById("home").style.display="none";
+  document.getElementById("domainView").style.display="block";
+  window.scrollTo(0,0);
+}
+function goHome(){
+  currentView="home";
+  document.getElementById("crumb").textContent="";
+  document.getElementById("domainView").style.display="none";
+  document.getElementById("home").style.display="block";
+  document.getElementById("home").scrollTop=0;
+}
+
+/* ---------- refresh on data / country change ---------- */
+function refresh(){
+  document.getElementById("ovCascade").innerHTML=cascadeHTML();
+  document.getElementById("ovKpis").innerHTML=kpisHTML();
+  if(currentView==="reach"){
+    const rc=document.getElementById("rCascade"),rk=document.getElementById("rKpis");
+    if(rc)rc.innerHTML=cascadeHTML(); if(rk)rk.innerHTML=kpisHTML();
+    if(ROWS.length)buildReachCharts();
+  }
+}
+
+/* ---------- CSV load ---------- */
+function ingest(parsed){
+  ROWS=parsed.map(cleanRow).filter(Boolean);
+  refresh();
+}
+function loadCsv(){
+  Papa.parse("data.csv",{download:true,header:true,skipEmptyLines:true,
+    complete:res=>ingest(res.data),
+    error:()=>{ROWS=[];refresh();
+      document.getElementById("ovCascade").innerHTML=`<div class="placeholder" style="grid-column:1/-1">Couldn't load <code>data.csv</code> automatically. On the live site it loads on its own; if you opened this file directly, use <b>Preview CSV…</b> above.</div>`;}});
+}
+
+/* ---------- events ---------- */
+document.querySelectorAll(".tab").forEach(btn=>btn.addEventListener("click",()=>{
+  document.querySelectorAll(".tab").forEach(b=>b.setAttribute("aria-pressed","false"));
+  btn.setAttribute("aria-pressed","true");active=btn.dataset.country;refresh();
+}));
+document.getElementById("brandHome").addEventListener("click",goHome);
+document.getElementById("backBtn").addEventListener("click",goHome);
+document.getElementById("csvfile").addEventListener("change",e=>{
+  const f=e.target.files[0];if(!f)return;
+  Papa.parse(f,{header:true,skipEmptyLines:true,complete:res=>{
+    ingest(res.data);
+    const b=document.getElementById("previewBanner");
+    b.innerHTML=`<b>Preview only.</b> Showing <b>${f.name}</b> from your computer — not saved or shared. To publish it, replace <code>data.csv</code> in the repository.`;
+    b.classList.add("show");
+  }});
 });
 
 /* ---------- init ---------- */
-renderCascade();
-renderKpis();
-buildCharts();
+renderCards();
+refresh();
+loadCsv();
 </script>
 </body>
 </html>
