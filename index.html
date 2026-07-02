@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,650&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
   :root{
     --paper:#FBFAF7;--paper-2:#F3F0E9;--card:#FFFFFF;--ink:#1C2B27;--ink-soft:#516560;--line:#E4DFD3;
@@ -22,9 +22,7 @@
   body{background:var(--paper);color:var(--ink);font-family:"Inter",system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
   .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
 
-  /* ---------- fixed top bar ---------- */
-  #topbar{position:fixed;top:0;left:0;right:0;height:var(--bar-h);z-index:100;
-    display:flex;align-items:center;gap:16px;padding:0 24px;
+  #topbar{position:fixed;top:0;left:0;right:0;height:var(--bar-h);z-index:100;display:flex;align-items:center;gap:16px;padding:0 24px;
     background:rgba(251,250,247,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
   .brand{display:flex;align-items:center;gap:10px;cursor:pointer;border:0;background:none;font:inherit;color:var(--ink);padding:0}
   .brand .mark{width:26px;height:26px;border-radius:7px;background:var(--pine);flex:none;position:relative}
@@ -32,8 +30,7 @@
   .brand b{font-family:"Fraunces",serif;font-weight:600;font-size:15px;letter-spacing:-.01em}
   .brand .crumb{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-soft)}
   .bar-right{margin-left:auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
-  .tab{font:inherit;font-size:12.5px;font-weight:500;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);
-    padding:6px 12px;border-radius:999px;cursor:pointer;transition:all .15s ease}
+  .tab{font:inherit;font-size:12.5px;font-weight:500;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);padding:6px 12px;border-radius:999px;cursor:pointer;transition:all .15s ease}
   .tab:hover{border-color:var(--pine);color:var(--pine)}
   .tab[aria-pressed="true"]{background:var(--pine);border-color:var(--pine);color:#fff}
   .tab .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:middle}
@@ -42,19 +39,15 @@
   .csvbtn:hover{border-color:var(--pine);color:var(--pine)}
   #csvfile{position:absolute;width:1px;height:1px;opacity:0}
 
-  /* ---------- home: snap scroller ---------- */
   #home{height:100dvh;overflow-y:auto;scroll-snap-type:y mandatory;scroll-behavior:smooth}
-  .snap{min-height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;display:flex;flex-direction:column;
-    justify-content:center;padding:calc(var(--bar-h) + 28px) 24px 40px}
+  .snap{min-height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;display:flex;flex-direction:column;justify-content:center;padding:calc(var(--bar-h) + 28px) 24px 40px}
   .snap-inner{max-width:1180px;margin:0 auto;width:100%}
   .hero-eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--harvest);margin:0 0 10px}
   .hero-title{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(28px,4vw,46px);line-height:1.03;margin:0;letter-spacing:-.015em;max-width:16ch}
   .hero-sub{color:var(--ink-soft);font-size:15px;margin:12px 0 0;max-width:60ch}
 
   .domains{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:34px}
-  .dcard{position:relative;border:0;text-align:left;cursor:pointer;color:#fff;border-radius:18px;padding:26px 26px 22px;
-    min-height:172px;display:flex;flex-direction:column;font:inherit;overflow:hidden;
-    box-shadow:var(--shadow);transition:transform .18s ease,box-shadow .18s ease}
+  .dcard{position:relative;border:0;text-align:left;cursor:pointer;color:#fff;border-radius:18px;padding:26px 26px 22px;min-height:172px;display:flex;flex-direction:column;font:inherit;overflow:hidden;box-shadow:var(--shadow);transition:transform .18s ease,box-shadow .18s ease}
   .dcard:hover{transform:translateY(-3px);box-shadow:0 16px 36px rgba(28,43,39,.14)}
   .dcard:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
   .dcard .dc-code{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;opacity:.85}
@@ -72,7 +65,6 @@
   .ov-title{font-family:"Fraunces",serif;font-weight:550;font-size:22px;margin:0;letter-spacing:-.01em}
   .ov-note{color:var(--ink-soft);font-size:13px;margin:2px 0 0}
 
-  /* ---------- cascade ---------- */
   .cascade{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch}
   .level{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 18px;box-shadow:var(--shadow)}
   .level .lvl-code{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-soft);letter-spacing:.1em;text-transform:uppercase}
@@ -84,7 +76,7 @@
   .mb-name{width:74px;flex:none;font-family:"IBM Plex Mono",monospace}
   .mb-track{flex:1;height:7px;background:var(--paper-2);border-radius:4px;overflow:hidden}
   .mb-fill{height:100%;border-radius:4px;transition:width .6s cubic-bezier(.2,.7,.3,1)}
-  .mb-val{width:30px;flex:none;text-align:right;font-variant-numeric:tabular-nums;color:var(--ink);font-weight:500}
+  .mb-val{width:34px;flex:none;text-align:right;font-variant-numeric:tabular-nums;color:var(--ink);font-weight:500}
   .connector{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 6px;min-width:60px}
   .connector .mult{font-family:"Fraunces",serif;font-size:17px;color:var(--harvest);font-weight:600}
   .connector .arrow{color:var(--line);font-size:22px;line-height:1}
@@ -92,12 +84,12 @@
   .placeholder{background:var(--card);border:1px dashed var(--line);border-radius:var(--radius);padding:28px;color:var(--ink-soft);font-size:13.5px;text-align:center}
 
   .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:18px}
+  .kpis.k2{grid-template-columns:repeat(2,1fr);max-width:600px}
   .kpi{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
   .kpi .k-code{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--harvest);letter-spacing:.1em}
   .kpi .k-num{font-family:"Fraunces",serif;font-weight:600;font-size:32px;line-height:1;margin:10px 0 4px;font-variant-numeric:tabular-nums}
   .kpi .k-lab{font-size:12px;color:var(--ink-soft)}
 
-  /* ---------- domain view ---------- */
   #domainView{display:none;min-height:100dvh;padding-top:var(--bar-h)}
   .dhead{--dc:var(--pine);background:var(--dc);color:#fff;padding:40px 0 34px}
   .dhead .back{background:rgba(255,255,255,.16);border:0;color:#fff;font:inherit;font-size:12.5px;padding:6px 13px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:background .15s}
@@ -105,23 +97,22 @@
   .dhead .d-dim{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.8;margin:18px 0 0}
   .dhead h2{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(26px,3.6vw,40px);margin:6px 0 0;letter-spacing:-.015em}
   .dhead .d-q{font-size:14.5px;opacity:.93;margin:12px 0 0;max-width:70ch}
-  .dbody{padding:34px 0 60px}
+  .dbody{padding:30px 0 60px}
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .grid2+.grid2{margin-top:22px}
   .panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
   .panel h3{font-family:"Fraunces",serif;font-weight:550;font-size:16px;margin:0 0 2px}
   .panel .p-code{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--harvest);letter-spacing:.08em}
   .panel .p-note{color:var(--ink-soft);font-size:12px;margin:2px 0 14px}
   .chart-box{position:relative;height:280px}
-  .subhead{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin:38px 0 14px}
+  .subhead{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin:34px 0 14px}
 
-  .ind{display:flex;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:12px}
-  .ind-code{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;color:#fff;background:var(--dc,var(--pine));border-radius:7px;padding:3px 9px;height:fit-content;flex:none}
-  .ind-title{font-weight:600;font-size:14.5px;margin:1px 0 3px}
-  .ind-def{font-size:13px;color:var(--ink-soft);line-height:1.5}
-  .ind-src{font-size:11.5px;color:var(--ink-soft);margin-top:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-  .chip{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:999px}
-  .chip-await{background:#F3ECDD;color:#8a6a2f}
-  .chip-live{background:#E4F0EB;color:#2F5D50}
+  .ind{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+  .ind:last-child{border-bottom:0}
+  .ind-code{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:500;color:#fff;background:var(--dc,var(--pine));border-radius:6px;padding:3px 8px;height:fit-content;flex:none}
+  .ind-title{font-weight:600;font-size:13.5px;margin:1px 0 2px}
+  .ind-def{font-size:12px;color:var(--ink-soft);line-height:1.45}
+  .chip{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:999px;background:#F3ECDD;color:#8a6a2f;margin-left:6px}
 
   footer{border-top:1px solid var(--line);background:var(--paper-2)}
   footer .wrap{padding:22px 24px 34px;display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:flex-start}
@@ -133,63 +124,47 @@
 
   .banner{display:none;background:#FCF3E7;border:1px solid #EBD3B0;color:#8a5a1f;font-size:12.5px;padding:9px 14px;border-radius:10px;margin-bottom:18px}
   .banner.show{display:block}
-  .banner b{font-weight:600}
-  .banner code{font-family:"IBM Plex Mono",monospace}
+  .banner b{font-weight:600}.banner code{font-family:"IBM Plex Mono",monospace}
 
   @media (max-width:820px){
-    .domains{grid-template-columns:1fr}
-    .cascade{grid-template-columns:1fr}
-    .connector{flex-direction:row;gap:10px;min-width:0;padding:4px 0}
-    .connector .arrow{transform:rotate(90deg)}
-    .kpis{grid-template-columns:1fr 1fr}
-    .grid2{grid-template-columns:1fr}
-    .snap{min-height:auto;padding-top:calc(var(--bar-h) + 24px)}
-    #home{scroll-snap-type:none}
+    .domains{grid-template-columns:1fr}.cascade{grid-template-columns:1fr}
+    .connector{flex-direction:row;gap:10px;min-width:0;padding:4px 0}.connector .arrow{transform:rotate(90deg)}
+    .kpis,.kpis.k2{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}
+    .snap{min-height:auto;padding-top:calc(var(--bar-h) + 24px)}#home{scroll-snap-type:none}
   }
-  @media (prefers-reduced-motion:reduce){
-    .mb-fill,.dcard{transition:none}.scroll-hint .chev{animation:none}#home{scroll-behavior:auto}
-  }
+  @media (prefers-reduced-motion:reduce){.mb-fill,.dcard{transition:none}.scroll-hint .chev{animation:none}#home{scroll-behavior:auto}}
 </style>
 </head>
 <body>
 
 <div id="topbar">
-  <button class="brand" id="brandHome" title="Home">
-    <span class="mark"></span>
-    <span><b>CapSha ToT</b> <span class="crumb" id="crumb"></span></span>
-  </button>
+  <button class="brand" id="brandHome" title="Home"><span class="mark"></span><span><b>CapSha ToT</b> <span class="crumb" id="crumb"></span></span></button>
   <div class="bar-right">
     <button class="tab" data-country="all" aria-pressed="true">All</button>
     <button class="tab" data-country="bd" aria-pressed="false"><span class="dot" style="background:var(--bd)"></span>Bangladesh</button>
     <button class="tab" data-country="et" aria-pressed="false"><span class="dot" style="background:var(--et)"></span>Ethiopia</button>
     <button class="tab" data-country="vn" aria-pressed="false"><span class="dot" style="background:var(--vn)"></span>Vietnam</button>
-    <label class="csvbtn" for="csvfile" title="Preview a CSV from your computer">Preview CSV…</label>
-    <input type="file" id="csvfile" accept=".csv,text/csv">
+    <label class="csvbtn" for="csvfile" title="Preview a workbook from your computer">Preview data…</label>
+    <input type="file" id="csvfile" accept=".xlsx,.xls">
   </div>
 </div>
 
-<!-- ================= HOME ================= -->
 <div id="home">
   <section class="snap">
     <div class="snap-inner">
       <p class="hero-eyebrow">Better Diets &amp; Nutrition · CGIAR · CapSha</p>
       <h1 class="hero-title">Training of Trainers — four domains of impact</h1>
-      <p class="hero-sub">Choose a country above, then open a domain to explore the data. Scroll down for a programme overview.</p>
+      <p class="hero-sub">Choose a country above, then open a domain to explore its data. Scroll down for a programme overview.</p>
       <div class="domains" id="domainCards"></div>
       <div class="scroll-hint"><span>Programme overview</span><span class="chev">↓</span></div>
     </div>
   </section>
-
   <section class="snap" style="background:var(--paper-2)">
     <div class="snap-inner">
       <div id="previewBanner" class="banner"></div>
-      <div class="ov-head">
-        <span class="ov-code">R1</span>
-        <div>
-          <h2 class="ov-title">Programme at a glance</h2>
-          <p class="ov-note">The training cascade and headline reach figures for the current country selection.</p>
-        </div>
-      </div>
+      <div class="ov-head"><span class="ov-code">R1</span><div>
+        <h2 class="ov-title">Programme at a glance</h2>
+        <p class="ov-note">The training cascade and headline reach figures for the current country selection.</p></div></div>
       <div class="cascade" id="ovCascade"></div>
       <div class="kpis" id="ovKpis"></div>
       <div class="scroll-hint" style="margin-top:26px"><span>Open a domain above for the full picture</span></div>
@@ -197,205 +172,237 @@
   </section>
 </div>
 
-<!-- ================= DOMAIN VIEW ================= -->
 <div id="domainView">
-  <div class="dhead" id="dhead">
-    <div class="wrap">
-      <button class="back" id="backBtn">← All domains</button>
-      <div class="d-dim" id="dDim"></div>
-      <h2 id="dName"></h2>
-      <p class="d-q" id="dQ"></p>
-    </div>
-  </div>
+  <div class="dhead" id="dhead"><div class="wrap">
+    <button class="back" id="backBtn">← All domains</button>
+    <div class="d-dim" id="dDim"></div><h2 id="dName"></h2><p class="d-q" id="dQ"></p>
+  </div></div>
   <div class="dbody"><div class="wrap" id="domainBody"></div></div>
   <footer><div class="wrap">
-    <p>Reach figures read live from <code>data.csv</code>. Other domains populate as their survey and log data are added. Do not put names or personal identifiers in public data files.</p>
-    <div class="legend">
-      <span><i style="background:var(--bd)"></i>Bangladesh</span>
-      <span><i style="background:var(--et)"></i>Ethiopia</span>
-      <span><i style="background:var(--vn)"></i>Vietnam</span>
-    </div>
+    <p>All figures are placeholder data read from <code>dashboard-data.xlsx</code> (one tab per domain), for exploring the layout. Do not put names or personal identifiers in public data files.</p>
+    <div class="legend"><span><i style="background:var(--bd)"></i>Bangladesh</span><span><i style="background:var(--et)"></i>Ethiopia</span><span><i style="background:var(--vn)"></i>Vietnam</span></div>
   </div></footer>
 </div>
 
 <script>
-/* ---------------- domain configuration ---------------- */
+/* ---------------- domains ---------------- */
 const DOMAINS={
-  reach:{name:"Reach",color:"var(--d-reach)",dim:"Scalability",codes:"R1–R5",
-    q:"What is the outreach of the ToT programme roll-out across national and subnational levels?",
-    blurb:"How many facilitators are trained, how many trainings run, and how far the ToT content spreads.",
-    indicators:[
-      {code:"R2",title:"Subnational trainings conducted",def:"Number of ToT trainings delivered by trained facilitators, by level (R2.1–R2.3).",src:"Training log sheet"},
-      {code:"R3",title:"Participants reached",def:"Total participants reached through subnational trainings, disaggregated by gender (R3.1–R3.3).",src:"Training log sheet"},
-      {code:"R4",title:"Projects & programmes using ToT content",def:"Projects and programmes applying ToT module content, and their thematic areas.",src:"6-monthly stocktake survey"},
-      {code:"R5",title:"Awareness, advocacy & influencing events",def:"Number and type of events using ToT content, topics targeted and modules used.",src:"Event log · stocktake survey"}
-    ]},
-  effectiveness:{name:"Effectiveness",color:"var(--d-eff)",dim:"Quality",codes:"E1–E6",
-    q:"How effectively does the ToT meet a country's capacity needs to implement its food-system-transformation roadmap?",
-    blurb:"Whether the modules build the right knowledge and skills, and how those are put into practice.",
-    indicators:[
-      {code:"E1",title:"Does the ToT meet capacity needs?",def:"Trained facilitators' perspective on whether the ToT meets the country's capacity needs.",src:"Stocktake survey"},
-      {code:"E2",title:"Change in individual capacity scores",def:"Pre- and post-ToT self-assessment on the specific capacities strengthened.",src:"Pre/post ToT survey"},
-      {code:"E3",title:"ToT practices applied",def:"Coaching & mentoring, contextual adaptation, and skill/knowledge support applied in roll-out.",src:"Practice documentation"},
-      {code:"E4",title:"Adapted materials developed",def:"Number of adapted training materials or modules developed for local delivery.",src:"Stocktake survey"},
-      {code:"E5",title:"Core module elements retained",def:"Local materials incorporate the food-system analysis, collaboration and change elements of ToT L1.",src:"Training register checklist"},
-      {code:"E6",title:"Didactic approach retained",def:"Local delivery keeps the L1 didactic approach and intended learning outcomes per module.",src:"Didactic alignment checklist"}
-    ]},
-  sustainability:{name:"Sustainability",color:"var(--d-sus)",dim:"Anchoring",codes:"S1–S6",
-    q:"To what extent are ToT capacities anchored in facilitators, their organisations and partnerships beyond the programme?",
-    blurb:"Whether collaboration, application, motivation and peer learning continue after the training.",
-    indicators:[
-      {code:"S1",title:"Collaborative actions",def:"Number and type of joint initiatives, MSP activities and co-facilitation linked to the ToT.",src:"Collaborative action log"},
-      {code:"S2",title:"Capacities applied in daily practice",def:"Share of facilitators applying ToT capacities in their day-to-day professional work.",src:"Stocktake survey"},
-      {code:"S3",title:"Facilitator motivation",def:"Trained facilitators' motivation levels to keep delivering ToT sessions.",src:"Stocktake · coaching sessions"},
-      {code:"S4",title:"Retention post-ToT",def:"Share of trained facilitators still active across tracks 1, 2 and/or 3 after training.",src:"Stocktake survey"},
-      {code:"S5",title:"Follow-up peer-coaching sessions",def:"Number of peer coaching and sharing sessions organised by the facilitator pool.",src:"Peer support session log"},
-      {code:"S6",title:"Topics discussed in peer support",def:"Themes and questions raised in peer support groups and online exchanges.",src:"Peer support session log"}
-    ]},
-  relevance:{name:"Relevance",color:"var(--d-rel)",dim:"Contextualization",codes:"C1–C4",
-    q:"Are facilitators equipped to contextualise the curriculum across scales, locations and audiences, and make it fit for purpose?",
-    blurb:"Whether the curriculum fits local needs and leaves facilitators prepared for what comes next.",
-    indicators:[
-      {code:"C1",title:"Positive feedback on relevance",def:"Share of subnational participants rating the curriculum relevant to their local context.",src:"Post-training survey"},
-      {code:"C2",title:"Ability to localise the curriculum",def:"Share of trainers demonstrating they can adapt the curriculum to local needs.",src:"Facilitator self-reflection form"},
-      {code:"C3",title:"Equipped to roll out the roadmap",def:"Share of facilitators who feel adequately equipped to roll out the FST roadmap.",src:"Post-training survey"},
-      {code:"C4",title:"Additional capacities needed",def:"Type and frequency of further capacities facilitators say they still require.",src:"Capacity gap mapping form"}
-    ]}
+  reach:{name:"Reach",color:"var(--d-reach)",dim:"Scalability",codes:"R1–R5",q:"What is the outreach of the ToT programme roll-out across national and subnational levels?",blurb:"How many facilitators are trained, how many trainings run, and how far the ToT content spreads."},
+  effectiveness:{name:"Effectiveness",color:"var(--d-eff)",dim:"Quality",codes:"E1–E6",q:"How effectively does the ToT meet a country's capacity needs to implement its food-system-transformation roadmap?",blurb:"Whether the modules build the right knowledge and skills, and how those are put into practice."},
+  sustainability:{name:"Sustainability",color:"var(--d-sus)",dim:"Anchoring",codes:"S1–S6",q:"To what extent are ToT capacities anchored in facilitators, their organisations and partnerships beyond the programme?",blurb:"Whether collaboration, application, motivation and peer learning continue after the training."},
+  relevance:{name:"Relevance",color:"var(--d-rel)",dim:"Contextualization",codes:"C1–C4",q:"Are facilitators equipped to contextualise the curriculum across scales, locations and audiences?",blurb:"Whether the curriculum fits local needs and leaves facilitators prepared for what comes next."}
 };
 const DVAR={reach:"--d-reach",effectiveness:"--d-eff",sustainability:"--d-sus",relevance:"--d-rel"};
+const AWAIT={
+  effectiveness:[["E5","Local materials keep the core food-system, collaboration and change elements."],["E6","Local delivery keeps the L1 didactic approach and learning outcomes."]],
+  sustainability:[["S3","Facilitator motivation levels to keep delivering sessions."],["S6","Topics and questions raised in peer support and online exchanges."]],
+  relevance:[["C·","Open-text feedback and capacity-gap themes (qualitative)."]]
+};
 
-/* ---------------- data layer (Reach / R1) ---------------- */
+/* ---------------- data ---------------- */
 const COUNTRY_MAP={bangladesh:"bd",ethiopia:"et",vietnam:"vn",bd:"bd",et:"et",vn:"vn"};
 const COUNTRY={bd:{name:"Bangladesh",color:"#3E8E7E"},et:{name:"Ethiopia",color:"#C9762F"},vn:{name:"Vietnam",color:"#5B7DB1"}};
-const LEVELS=["L1","L2","L3"];
+const SHEETKEY={Reach:"reach",Effectiveness:"effectiveness",Sustainability:"sustainability",Relevance:"relevance"};
+const LEVELS=["L1","L2","L3"], LVLLAB={L1:"Level 1",L2:"Level 2",L3:"Level 3"};
 const LVL_NAMES={L1:"National · trained by WUR",L2:"Subnational L2 · trained by L1",L3:"Subnational L3 · trained by L2"};
-const ORG_ORDER=["Government","University & research","Civil society","Private sector","Multilateral"];
-const SECTOR_ORDER=["Health & nutrition","Agriculture & food","Environment","Education","Industry","Other"];
+let DATA={reach:[],effectiveness:[],sustainability:[],relevance:[]};
+let active="all", currentView="home", CH={};
 
-let ROWS=[], active="all", currentView="home", reachCharts={};
+const cmap=n=>COUNTRY_MAP[(n||"").toString().trim().toLowerCase()]||n;
+const getInd=(d,ind)=>DATA[d].filter(r=>r.indicator===ind);
+function inActive(r){return active==="all"||cmap(r.country)===active;}
+function sumInd(d,ind,pred){return getInd(d,ind).filter(r=>inActive(r)&&(!pred||pred(r))).reduce((a,r)=>a+r.value,0);}
+function meanInd(d,ind,pred){const rs=getInd(d,ind).filter(r=>inActive(r)&&(!pred||pred(r)));return rs.length?rs.reduce((a,r)=>a+r.value,0)/rs.length:0;}
+const hasData=()=>DATA.reach.length>0;
 
-const low=s=>(s||"").toString().trim().toLowerCase();
-function cleanRow(r){
-  const get=k=>{for(const key in r){if(low(key)===k)return r[key];}return "";};
-  const c=COUNTRY_MAP[low(get("country"))];
-  let lvl=low(get("level")).replace(/[^0-9]/g,""); lvl=lvl?("L"+lvl):"";
-  if(!c||!LEVELS.includes(lvl))return null;
-  const g=low(get("gender")); const gender=(g.startsWith("w")||g.startsWith("f"))?"Woman":(g?"Man":"");
-  const a=low(get("age_group")); const age=(a.includes("under")||a.includes("<")||a.includes("below"))?"Under 35":"35 and over";
-  const match=(val,list)=>{const v=low(val);return list.find(o=>low(o)===v)||list.find(o=>v&&low(o).startsWith(v.slice(0,4)))||"Other";};
-  return {country:c,level:lvl,gender,age,org:match(get("org_type"),ORG_ORDER),sector:match(get("sector"),SECTOR_ORDER)};
+function aggregate(rows){
+  const unit=(rows[0]&&rows[0].unit)||"count";
+  const flt=rows.filter(inActive), sum={},cnt={};
+  const cats=[],series=[];
+  flt.forEach(r=>{if(!cats.includes(r.category))cats.push(r.category);const s=r.series||"value";if(!series.includes(s))series.push(s);});
+  flt.forEach(r=>{const k=(r.series||"value")+"|"+r.category;sum[k]=(sum[k]||0)+r.value;cnt[k]=(cnt[k]||0)+1;});
+  const val=(s,c)=>{const k=s+"|"+c;if(!(k in sum))return 0;return unit==="count"?sum[k]:+(sum[k]/cnt[k]).toFixed(2);};
+  return {cats,series,unit,val};
 }
-const rowsFor=()=>active==="all"?ROWS:ROWS.filter(r=>r.country===active);
-function countBy(rows,fn,keys){const m=Object.fromEntries(keys.map(k=>[k,0]));rows.forEach(r=>{const k=fn(r);if(k in m)m[k]++;});return m;}
 
-/* ---------- HTML builders (shared by overview + reach) ---------- */
+/* ---------------- cascade + reach KPIs ---------------- */
+function facLevel(lv){return getInd("reach","R1").filter(r=>r.category===lv&&inActive(r)).reduce((a,r)=>a+r.value,0);}
+function facCountryLevel(c,lv){return getInd("reach","R1").filter(r=>r.category===lv&&cmap(r.country)===c).reduce((a,r)=>a+r.value,0);}
 function cascadeHTML(){
-  if(!ROWS.length)return `<div class="placeholder" style="grid-column:1/-1">No data loaded yet. Use <b>Preview CSV…</b> to load a file, or add <code>data.csv</code> to the repository.</div>`;
-  const rows=rowsFor();
-  const tot=lv=>rows.filter(r=>r.level===lv).length;
-  const totals={L1:tot("L1"),L2:tot("L2"),L3:tot("L3")};
+  if(!hasData())return `<div class="placeholder" style="grid-column:1/-1">No data loaded yet. Use <b>Preview data…</b> to load a workbook, or add <code>dashboard-data.xlsx</code> to the repository.</div>`;
+  const totals={L1:facLevel("L1"),L2:facLevel("L2"),L3:facLevel("L3")};
   const ks=active==="all"?Object.keys(COUNTRY):[active];
   let h="";
   LEVELS.forEach((lv,i)=>{
-    const maxC=Math.max(1,...Object.keys(COUNTRY).map(c=>ROWS.filter(r=>r.country===c&&r.level===lv).length));
+    const maxC=Math.max(1,...Object.keys(COUNTRY).map(c=>facCountryLevel(c,lv)));
     let mb="";
-    ks.forEach(c=>{const v=ROWS.filter(r=>r.country===c&&r.level===lv).length;
+    ks.forEach(c=>{const v=facCountryLevel(c,lv);
       mb+=`<div class="mb-row"><span class="mb-name">${COUNTRY[c].name.slice(0,8)}</span>
         <span class="mb-track"><span class="mb-fill" style="width:${Math.round(v/maxC*100)}%;background:${COUNTRY[c].color}"></span></span>
         <span class="mb-val">${v}</span></div>`;});
     h+=`<div class="level"><div class="lvl-code">Level ${i+1}</div><div class="lvl-name">${LVL_NAMES[lv]}</div>
-      <div class="lvl-total">${totals[lv]}<small>trained facilitators</small></div>
-      <div class="minibars">${mb}</div></div>`;
+      <div class="lvl-total">${totals[lv]}<small>trained facilitators</small></div><div class="minibars">${mb}</div></div>`;
     if(i<2){const m=totals[lv]?(totals[LEVELS[i+1]]/totals[lv]).toFixed(1):"–";
       h+=`<div class="connector"><span class="arrow">→</span><span class="mult">×${m}</span><span class="mult-lab">multiplier</span></div>`;}
   });
   return h;
 }
-function kpisHTML(){
-  const rows=rowsFor(),n=rows.length;
-  const pct=x=>n?Math.round(x/n*100)+"%":"–";
+function reachKpisHTML(){
+  const total=sumInd("reach","R1");
+  const pct=(x,d)=>d?Math.round(x/d*100)+"%":"–";
+  const women=sumInd("reach","R1",r=>r.series==="Woman");
+  const u35=sumInd("reach","R1_age",r=>r.series==="Under 35"), ageTot=sumInd("reach","R1_age");
+  const gov=sumInd("reach","R1_org",r=>["Government","University & research"].includes(r.category)), orgTot=sumInd("reach","R1_org");
   const K=[
-    {n:n?n.toLocaleString():"–",l:"Trained facilitators (all levels)"},
-    {n:pct(rows.filter(r=>r.gender==="Woman").length),l:"Facilitators who are women"},
-    {n:pct(rows.filter(r=>r.age==="Under 35").length),l:"Facilitators under 35"},
-    {n:pct(rows.filter(r=>r.org==="Government"||r.org==="University & research").length),l:"Government, university or research"}
+    {n:total?total.toLocaleString():"–",l:"Trained facilitators (all levels)"},
+    {n:pct(women,total),l:"Facilitators who are women"},
+    {n:pct(u35,ageTot),l:"Facilitators under 35"},
+    {n:pct(gov,orgTot),l:"Government, university or research"}
   ];
   return K.map(k=>`<div class="kpi"><div class="k-code">R1</div><div class="k-num">${k.n}</div><div class="k-lab">${k.l}</div></div>`).join("");
 }
 
-/* ---------- chart data ---------- */
-function levelData(){const rows=rowsFor();const f=lv=>({w:rows.filter(r=>r.level===lv&&r.gender==="Woman").length,m:rows.filter(r=>r.level===lv&&r.gender==="Man").length});const a=f("L1"),b=f("L2"),c=f("L3");return {women:[a.w,b.w,c.w],men:[a.m,b.m,c.m]};}
-function orgData(){const m=countBy(rowsFor(),r=>r.org,ORG_ORDER);return ORG_ORDER.map(k=>m[k]);}
-function sectorData(){const m=countBy(rowsFor(),r=>r.sector,SECTOR_ORDER);return SECTOR_ORDER.map(k=>m[k]);}
-function ageData(){const rows=rowsFor();const f=g=>LEVELS.map(lv=>rows.filter(r=>r.level===lv&&r.age===g).length);return {under:f("Under 35"),over:f("35 and over")};}
-
+/* ---------------- generic chart ---------------- */
 Chart.defaults.font.family="Inter, sans-serif";Chart.defaults.font.size=12;Chart.defaults.color="#516560";
 const GRID="#ECE8DE";const reduce=window.matchMedia("(prefers-reduced-motion:reduce)").matches;
-function baseOpts(o={}){
+const C={pine:"#2F5D50",sage:"#9DBFB6",harvest:"#D98A3D",blue:"#5B7DB1",sand:"#D7CFBE",eff:"#C4762E",sus:"#3E6B8B",rel:"#8A5A7A"};
+function chartOpts(o){
   const opt={responsive:true,maintainAspectRatio:false,animation:{duration:reduce?0:600},
-    plugins:{legend:{display:o.legend!==false,position:"bottom",labels:{boxWidth:12,boxHeight:12,usePointStyle:true,padding:16}},
+    plugins:{legend:{display:!!o.legend,position:"bottom",labels:{boxWidth:12,boxHeight:12,usePointStyle:true,padding:16}},
       tooltip:{backgroundColor:"#1C2B27",padding:10,cornerRadius:8}},scales:{}};
-  if(o.horizontal){opt.indexAxis="y";opt.scales.x={grid:{color:GRID},border:{display:false},ticks:{precision:0}};opt.scales.y={grid:{display:false},border:{display:false}};}
-  else{opt.scales.x={stacked:!!o.stacked,grid:{display:false},border:{display:false}};opt.scales.y={stacked:!!o.stacked,beginAtZero:true,grid:{color:GRID},border:{display:false},ticks:{precision:0}};}
+  if(o.horizontal){opt.indexAxis="y";opt.scales.x={beginAtZero:true,max:o.max,grid:{color:GRID},border:{display:false},ticks:{precision:0}};opt.scales.y={grid:{display:false},border:{display:false}};}
+  else{opt.scales.x={stacked:!!o.stacked,grid:{display:false},border:{display:false}};opt.scales.y={stacked:!!o.stacked,beginAtZero:true,max:o.max,grid:{color:GRID},border:{display:false},ticks:{precision:0}};}
   return opt;
 }
-function destroyReachCharts(){Object.values(reachCharts).forEach(c=>c&&c.destroy());reachCharts={};}
-function buildReachCharts(){
-  destroyReachCharts();
-  const l=levelData();
-  reachCharts.level=new Chart(document.getElementById("chLevel"),{type:"bar",data:{labels:["Level 1","Level 2","Level 3"],datasets:[
-    {label:"Women",data:l.women,backgroundColor:"#2F5D50",borderRadius:5,maxBarThickness:46},
-    {label:"Men",data:l.men,backgroundColor:"#9DBFB6",borderRadius:5,maxBarThickness:46}]},options:baseOpts({stacked:true})});
-  reachCharts.org=new Chart(document.getElementById("chOrg"),{type:"bar",data:{labels:ORG_ORDER,datasets:[{data:orgData(),backgroundColor:"#D98A3D",borderRadius:5,maxBarThickness:26}]},options:baseOpts({horizontal:true,legend:false})});
-  reachCharts.sector=new Chart(document.getElementById("chSector"),{type:"bar",data:{labels:SECTOR_ORDER,datasets:[{data:sectorData(),backgroundColor:"#5B7DB1",borderRadius:5,maxBarThickness:24}]},options:baseOpts({horizontal:true,legend:false})});
-  const a=ageData();
-  reachCharts.age=new Chart(document.getElementById("chAge"),{type:"bar",data:{labels:["Level 1","Level 2","Level 3"],datasets:[
-    {label:"Under 35",data:a.under,backgroundColor:"#2F5D50",borderRadius:5,maxBarThickness:46},
-    {label:"35 and over",data:a.over,backgroundColor:"#D7CFBE",borderRadius:5,maxBarThickness:46}]},options:baseOpts({stacked:true})});
+function makeChart(id,cfg){
+  const el=document.getElementById(id);if(!el)return;
+  if(CH[id]){CH[id].destroy();delete CH[id];}
+  const rows=getInd(cfg.domain,cfg.indicator);if(!rows.length)return;
+  const A=aggregate(rows);
+  const labels=A.cats.map(c=>(cfg.labelMap&&cfg.labelMap[c])||c);
+  const cols=cfg.colors||[C.pine];
+  const multi=A.series.length>1&&A.series[0]!=="value";
+  let datasets;
+  if(multi){datasets=A.series.map((s,i)=>({label:s,data:A.cats.map(c=>A.val(s,c)),backgroundColor:cols[i%cols.length],borderColor:cols[i%cols.length],borderRadius:5,maxBarThickness:cfg.kind==="hbar"?24:46}));}
+  else{datasets=[{label:cfg.indicator,data:A.cats.map(c=>A.val(A.series[0],c)),backgroundColor:cols[0],borderColor:cols[0],borderRadius:5,maxBarThickness:cfg.kind==="hbar"?24:46,fill:false,tension:.3,pointRadius:4}];}
+  let type="bar",opts;
+  if(cfg.kind==="line"){type="line";opts=chartOpts({max:cfg.max,legend:false});}
+  else if(cfg.kind==="hbar")opts=chartOpts({horizontal:true,max:cfg.max,legend:multi});
+  else if(cfg.kind==="stacked")opts=chartOpts({stacked:true,max:cfg.max,legend:true});
+  else if(cfg.kind==="grouped")opts=chartOpts({max:cfg.max,legend:true});
+  else opts=chartOpts({max:cfg.max,legend:false});
+  CH[id]=new Chart(el,{type,data:{labels,datasets},options:opts});
 }
 
-/* ---------- landing cards ---------- */
+/* ---------------- landing cards ---------------- */
 function renderCards(){
   document.getElementById("domainCards").innerHTML=Object.entries(DOMAINS).map(([key,d])=>
     `<button class="dcard" style="background:${d.color}" data-domain="${key}">
-      <span class="dc-code">${d.codes}</span>
-      <span class="dc-dim">${d.dim}</span>
-      <span class="dc-name">${d.name}</span>
-      <span class="dc-blurb">${d.blurb}</span>
-      <span class="dc-go">Explore ${d.name} →</span>
-    </button>`).join("");
+      <span class="dc-code">${d.codes}</span><span class="dc-dim">${d.dim}</span>
+      <span class="dc-name">${d.name}</span><span class="dc-blurb">${d.blurb}</span>
+      <span class="dc-go">Explore ${d.name} →</span></button>`).join("");
   document.querySelectorAll(".dcard").forEach(b=>b.addEventListener("click",()=>openDomain(b.dataset.domain)));
 }
 
-/* ---------- domain body ---------- */
-function indicatorHTML(list,await_=true){
-  return list.map(i=>`<div class="ind">
-      <span class="ind-code">${i.code}</span>
-      <div><div class="ind-title">${i.title}</div><div class="ind-def">${i.def}</div>
-      <div class="ind-src">Source: ${i.src} <span class="chip ${await_?"chip-await":"chip-live"}">${await_?"awaiting data":"live"}</span></div></div>
-    </div>`).join("");
+/* ---------------- domain bodies ---------------- */
+function panel(code,title,note,canvasId){
+  return `<div class="panel"><span class="p-code">${code}</span><h3>${title}</h3><p class="p-note">${note}</p><div class="chart-box"><canvas id="${canvasId}"></canvas></div></div>`;
 }
-function reachBodyHTML(){
-  return `
-    <div class="ov-head"><span class="ov-code">R1 · R1.1–1.3</span><div>
-      <h2 class="ov-title">The training cascade</h2>
-      <p class="ov-note">Level 1 (trained by WUR) train Level 2, who train Level 3 — multiplying the pool of facilitators.</p></div></div>
-    <div class="cascade" id="rCascade"></div>
-    <div class="kpis" id="rKpis"></div>
+function infoPanel(key){
+  const list=AWAIT[key]||[];if(!list.length)return "";
+  return `<div class="panel"><span class="p-code">also in this domain</span><h3>Further indicators</h3><p class="p-note">Populate as their data is added.</p>
+    ${list.map(([c,t])=>`<div class="ind"><span class="ind-code">${c}</span><div><div class="ind-def">${t}</div></div></div>`).join("")}</div>`;
+}
+function reachBody(){
+  return `<div class="ov-head"><span class="ov-code">R1 · R1.1–1.3</span><div>
+      <h2 class="ov-title">The training cascade</h2><p class="ov-note">Level 1 (trained by WUR) train Level 2, who train Level 3 — multiplying the pool of facilitators.</p></div></div>
+    <div class="cascade" id="rCascade"></div><div class="kpis" id="rKpis"></div>
     <div class="subhead">Who is trained · R1 disaggregation</div>
     <div class="grid2">
-      <div class="panel"><span class="p-code">R1 · gender</span><h3>Facilitators by level</h3><p class="p-note">Headcount per level, split by gender.</p><div class="chart-box"><canvas id="chLevel"></canvas></div></div>
-      <div class="panel"><span class="p-code">R1 · organisation type</span><h3>Where facilitators come from</h3><p class="p-note">Trained facilitators by organisation type.</p><div class="chart-box"><canvas id="chOrg"></canvas></div></div>
-    </div>
-    <div class="grid2" style="margin-top:22px">
-      <div class="panel"><span class="p-code">R1 · thematic sector</span><h3>Sectors represented</h3><p class="p-note">Trained facilitators by thematic sector.</p><div class="chart-box"><canvas id="chSector"></canvas></div></div>
-      <div class="panel"><span class="p-code">R1 · age</span><h3>Age profile across the cascade</h3><p class="p-note">Share under vs over 35, by level.</p><div class="chart-box"><canvas id="chAge"></canvas></div></div>
-    </div>
-    <div class="subhead">More reach indicators · added as their data arrives</div>
-    ${indicatorHTML(DOMAINS.reach.indicators,true)}`;
+      ${panel("R1 · gender","Facilitators by level","Headcount per level, split by gender.","chR1level")}
+      ${panel("R1 · organisation","Where facilitators come from","Trained facilitators by organisation type.","chR1org")}</div>
+    <div class="grid2">
+      ${panel("R1 · sector","Sectors represented","Trained facilitators by thematic sector.","chR1sector")}
+      ${panel("R1 · age","Age profile across the cascade","Under vs over 35, by level.","chR1age")}</div>
+    <div class="subhead">Trainings, reach &amp; use · R2–R5</div>
+    <div class="grid2">
+      ${panel("R2","Subnational trainings conducted","Number of ToT trainings delivered, by level.","chR2")}
+      ${panel("R3","Participants reached","Participants reached through trainings, by level and gender.","chR3")}</div>
+    <div class="grid2">
+      ${panel("R4","Projects &amp; programmes using ToT content","By thematic area of intervention.","chR4")}
+      ${panel("R5","Awareness, advocacy &amp; influencing events","By type of event.","chR5")}</div>`;
 }
-function openDomain(key){
-  const d=DOMAINS[key];currentView=key;
+function effBody(){
+  return `<div class="kpis k2" id="dKpis"></div>
+    <div class="subhead">Capacity &amp; practice · E1–E4</div>
+    <div class="grid2">
+      ${panel("E2 · capacity change","Capacity growth by module","Average self-assessed capacity (1–5), before vs after.","chE2")}
+      ${panel("E3 · practices","ToT practices applied","Coaching, adaptation and skill/knowledge support.","chE3")}</div>
+    <div class="grid2">
+      ${panel("E4 · materials","Adapted materials developed","Number developed, by country.","chE4")}
+      ${infoPanel("effectiveness")}</div>`;
+}
+function susBody(){
+  return `<div class="kpis k2" id="dKpis"></div>
+    <div class="subhead">Anchoring &amp; continuation · S1–S6</div>
+    <div class="grid2">
+      ${panel("S1 · collaboration","Collaborative actions","By type of action, linked to the ToT.","chS1")}
+      ${panel("S2 · application","Capacities applied in practice","Share applying each capacity in daily work.","chS2")}</div>
+    <div class="grid2">
+      ${panel("S5 · peer coaching","Follow-up peer-coaching sessions","Sessions logged over recent months.","chS5")}
+      ${infoPanel("sustainability")}</div>`;
+}
+function relBody(){
+  return `<div class="kpis k2" id="dKpis"></div>
+    <div class="subhead">Fit &amp; readiness · C1–C4</div>
+    <div class="grid2">
+      ${panel("C1 · relevance","Positive feedback on relevance","Share rating the curriculum relevant, by country.","chC1")}
+      ${panel("C2 · localisation","Ability to localise the curriculum","Share demonstrating adaptation, by country.","chC2")}</div>
+    <div class="grid2">
+      ${panel("C4 · gaps","Additional capacities needed","By type of capacity requested.","chC4")}
+      ${infoPanel("relevance")}</div>`;
+}
+function domainKpisHTML(key){
+  let cards=[];
+  if(key==="effectiveness"){
+    const gain=meanInd("effectiveness","E2",r=>r.series==="Post")-meanInd("effectiveness","E2",r=>r.series==="Pre");
+    cards=[{c:"E2",n:(gain>0?"+":"")+gain.toFixed(1),l:"Average capacity gain (1–5 scale)"},
+           {c:"E1",n:Math.round(meanInd("effectiveness","E1"))+"%",l:"Say the ToT meets capacity needs"}];
+  }else if(key==="sustainability"){
+    cards=[{c:"S4",n:Math.round(meanInd("sustainability","S4"))+"%",l:"Facilitator retention post-ToT"},
+           {c:"S1",n:sumInd("sustainability","S1").toLocaleString(),l:"Collaborative actions logged"}];
+  }else if(key==="relevance"){
+    cards=[{c:"C1",n:Math.round(meanInd("relevance","C1"))+"%",l:"Rate the curriculum relevant"},
+           {c:"C3",n:Math.round(meanInd("relevance","C3"))+"%",l:"Feel equipped to roll out the roadmap"}];
+  }
+  return cards.map(k=>`<div class="kpi"><div class="k-code">${k.c}</div><div class="k-num">${k.n}</div><div class="k-lab">${k.l}</div></div>`).join("");
+}
+function renderDomainCharts(key){
+  if(key==="reach"){
+    makeChart("chR1level",{domain:"reach",indicator:"R1",kind:"stacked",colors:[C.pine,C.sage],labelMap:LVLLAB});
+    makeChart("chR1org",{domain:"reach",indicator:"R1_org",kind:"hbar",colors:[C.harvest]});
+    makeChart("chR1sector",{domain:"reach",indicator:"R1_sector",kind:"hbar",colors:[C.blue]});
+    makeChart("chR1age",{domain:"reach",indicator:"R1_age",kind:"stacked",colors:[C.pine,C.sand],labelMap:LVLLAB});
+    makeChart("chR2",{domain:"reach",indicator:"R2",kind:"bar",colors:[C.pine],labelMap:LVLLAB});
+    makeChart("chR3",{domain:"reach",indicator:"R3",kind:"stacked",colors:[C.pine,C.sage],labelMap:LVLLAB});
+    makeChart("chR4",{domain:"reach",indicator:"R4",kind:"hbar",colors:[C.harvest]});
+    makeChart("chR5",{domain:"reach",indicator:"R5",kind:"hbar",colors:[C.blue]});
+  }else if(key==="effectiveness"){
+    makeChart("chE2",{domain:"effectiveness",indicator:"E2",kind:"grouped",max:5,colors:[C.sand,C.eff]});
+    makeChart("chE3",{domain:"effectiveness",indicator:"E3",kind:"hbar",colors:[C.eff]});
+    makeChart("chE4",{domain:"effectiveness",indicator:"E4",kind:"bar",colors:[C.eff]});
+  }else if(key==="sustainability"){
+    makeChart("chS1",{domain:"sustainability",indicator:"S1",kind:"hbar",colors:[C.sus]});
+    makeChart("chS2",{domain:"sustainability",indicator:"S2",kind:"hbar",max:100,colors:[C.sus]});
+    makeChart("chS5",{domain:"sustainability",indicator:"S5",kind:"line",colors:[C.sus]});
+  }else if(key==="relevance"){
+    makeChart("chC1",{domain:"relevance",indicator:"C1",kind:"bar",max:100,colors:[C.rel]});
+    makeChart("chC2",{domain:"relevance",indicator:"C2",kind:"bar",max:100,colors:[C.rel]});
+    makeChart("chC4",{domain:"relevance",indicator:"C4",kind:"hbar",colors:[C.rel]});
+  }
+}
+function renderDomain(key){
+  const d=DOMAINS[key];
   document.getElementById("dhead").style.setProperty("--dc",`var(${DVAR[key]})`);
   document.getElementById("dDim").textContent=d.dim+" · "+d.codes;
   document.getElementById("dName").textContent=d.name;
@@ -403,71 +410,62 @@ function openDomain(key){
   document.getElementById("crumb").textContent="/ "+d.name;
   const body=document.getElementById("domainBody");
   body.style.setProperty("--dc",`var(${DVAR[key]})`);
-  if(key==="reach"){
-    body.innerHTML=reachBodyHTML();
-    document.getElementById("rCascade").innerHTML=cascadeHTML();
-    document.getElementById("rKpis").innerHTML=kpisHTML();
-    if(ROWS.length)buildReachCharts(); else destroyReachCharts();
-  }else{
-    body.innerHTML=`<div class="subhead">Indicators in this domain</div>${indicatorHTML(d.indicators,true)}
-      <div class="placeholder" style="margin-top:8px">Charts for ${d.name} will appear here once the matching survey and log data are added as their own CSV — the same upload pattern as Reach.</div>`;
-  }
+  if(key==="reach"){body.innerHTML=reachBody();document.getElementById("rCascade").innerHTML=cascadeHTML();document.getElementById("rKpis").innerHTML=reachKpisHTML();}
+  else{body.innerHTML=key==="effectiveness"?effBody():key==="sustainability"?susBody():relBody();
+       document.getElementById("dKpis").innerHTML=domainKpisHTML(key);}
+  if(hasData())renderDomainCharts(key);
+}
+function openDomain(key){
+  currentView=key;renderDomain(key);
   document.getElementById("home").style.display="none";
   document.getElementById("domainView").style.display="block";
   window.scrollTo(0,0);
 }
 function goHome(){
-  currentView="home";
-  document.getElementById("crumb").textContent="";
+  currentView="home";document.getElementById("crumb").textContent="";
   document.getElementById("domainView").style.display="none";
-  document.getElementById("home").style.display="block";
-  document.getElementById("home").scrollTop=0;
+  document.getElementById("home").style.display="block";document.getElementById("home").scrollTop=0;
 }
 
-/* ---------- refresh on data / country change ---------- */
+/* ---------------- refresh ---------------- */
 function refresh(){
   document.getElementById("ovCascade").innerHTML=cascadeHTML();
-  document.getElementById("ovKpis").innerHTML=kpisHTML();
-  if(currentView==="reach"){
-    const rc=document.getElementById("rCascade"),rk=document.getElementById("rKpis");
-    if(rc)rc.innerHTML=cascadeHTML(); if(rk)rk.innerHTML=kpisHTML();
-    if(ROWS.length)buildReachCharts();
-  }
+  document.getElementById("ovKpis").innerHTML=reachKpisHTML();
+  if(currentView!=="home")renderDomain(currentView);
 }
 
-/* ---------- CSV load ---------- */
-function ingest(parsed){
-  ROWS=parsed.map(cleanRow).filter(Boolean);
+/* ---------------- load workbook ---------------- */
+function parseWB(wb){
+  DATA={reach:[],effectiveness:[],sustainability:[],relevance:[]};
+  wb.SheetNames.forEach(sn=>{const key=SHEETKEY[sn];if(!key)return;
+    XLSX.utils.sheet_to_json(wb.Sheets[sn],{defval:""}).forEach(r=>DATA[key].push({
+      indicator:String(r.indicator).trim(),country:String(r.country).trim(),series:String(r.series).trim(),
+      category:String(r.category).trim(),value:Number(r.value)||0,unit:(String(r.unit).trim()||"count")}));});
   refresh();
 }
-function loadCsv(){
-  Papa.parse("data.csv",{download:true,header:true,skipEmptyLines:true,
-    complete:res=>ingest(res.data),
-    error:()=>{ROWS=[];refresh();
-      document.getElementById("ovCascade").innerHTML=`<div class="placeholder" style="grid-column:1/-1">Couldn't load <code>data.csv</code> automatically. On the live site it loads on its own; if you opened this file directly, use <b>Preview CSV…</b> above.</div>`;}});
+function loadData(){
+  fetch("dashboard-data.xlsx").then(r=>{if(!r.ok)throw 0;return r.arrayBuffer();})
+    .then(buf=>parseWB(XLSX.read(buf,{type:"array"})))
+    .catch(()=>{DATA={reach:[],effectiveness:[],sustainability:[],relevance:[]};refresh();
+      document.getElementById("ovCascade").innerHTML=`<div class="placeholder" style="grid-column:1/-1">Couldn't load <code>dashboard-data.xlsx</code> automatically. On the live site it loads on its own; if you opened this file directly, use <b>Preview data…</b> above.</div>`;});
 }
 
-/* ---------- events ---------- */
+/* ---------------- events ---------------- */
 document.querySelectorAll(".tab").forEach(btn=>btn.addEventListener("click",()=>{
   document.querySelectorAll(".tab").forEach(b=>b.setAttribute("aria-pressed","false"));
-  btn.setAttribute("aria-pressed","true");active=btn.dataset.country;refresh();
-}));
+  btn.setAttribute("aria-pressed","true");active=btn.dataset.country;refresh();}));
 document.getElementById("brandHome").addEventListener("click",goHome);
 document.getElementById("backBtn").addEventListener("click",goHome);
 document.getElementById("csvfile").addEventListener("change",e=>{
-  const f=e.target.files[0];if(!f)return;
-  Papa.parse(f,{header:true,skipEmptyLines:true,complete:res=>{
-    ingest(res.data);
+  const f=e.target.files[0];if(!f)return;const rd=new FileReader();
+  rd.onload=ev=>{parseWB(XLSX.read(new Uint8Array(ev.target.result),{type:"array"}));
     const b=document.getElementById("previewBanner");
-    b.innerHTML=`<b>Preview only.</b> Showing <b>${f.name}</b> from your computer — not saved or shared. To publish it, replace <code>data.csv</code> in the repository.`;
-    b.classList.add("show");
-  }});
-});
+    b.innerHTML=`<b>Preview only.</b> Showing <b>${f.name}</b> from your computer — not saved or shared. To publish it, replace <code>dashboard-data.xlsx</code> in the repository.`;
+    b.classList.add("show");};
+  rd.readAsArrayBuffer(f);});
 
-/* ---------- init ---------- */
-renderCards();
-refresh();
-loadCsv();
+/* ---------------- init ---------------- */
+renderCards();refresh();loadData();
 </script>
 </body>
 </html>
