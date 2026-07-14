@@ -462,7 +462,7 @@ footer a{color:var(--reach);font-weight:500}
           <span class="dcard-codes"><span class="code">R1</span><span class="code">R2</span><span class="code">R3</span><span class="code">R4</span><span class="code">R5</span></span>
         </div>
         <h3>Reach</h3>
-        <p class="lede">How far the program has traveled — facilitators trained at every level, the trainings they run, and the projects and events where the modules turn up.</p>
+        <p class="lede">Scaling training efforts by equipping trainers with local mandate and networks — reaching more people, multiplying impact.</p>
         <div class="stats" id="s-reach"></div>
         <span class="enter">Open Reach →</span>
       </article>
@@ -473,20 +473,9 @@ footer a{color:var(--reach);font-weight:500}
           <span class="dcard-codes"><span class="code">E1</span><span class="code">E2</span><span class="code">E3</span><span class="code">E4</span><span class="code">E5</span><span class="code">E6</span></span>
         </div>
         <h3>Effectiveness</h3>
-        <p class="lede">Whether the modules land. Capacity before and after, and which practices facilitators carry into their own rollouts.</p>
+        <p class="lede">Targeted capacity strengthening that supports a country’s FST-NAP/Roadmap, through learning contextualized to local realities.</p>
         <div class="stats" id="s-effectiveness"></div>
         <span class="enter">Open Effectiveness →</span>
-      </article>
-
-      <article class="dcard d-sustainability" tabindex="0" role="button" data-domain="sustainability">
-        <div class="dcard-top">
-          <span class="eyebrow">Anchoring</span>
-          <span class="dcard-codes"><span class="code">S1</span><span class="code">S2</span><span class="code">S3</span><span class="code">S4</span><span class="code">S5</span><span class="code">S6</span></span>
-        </div>
-        <h3>Sustainability</h3>
-        <p class="lede">What holds after the workshop ends — collaborative action, capacities used day to day, and the peer coaching that keeps learning moving.</p>
-        <div class="stats" id="s-sustainability"></div>
-        <span class="enter">Open Sustainability →</span>
       </article>
 
       <article class="dcard d-relevance" tabindex="0" role="button" data-domain="relevance">
@@ -495,9 +484,20 @@ footer a{color:var(--reach);font-weight:500}
           <span class="dcard-codes"><span class="code">C1</span><span class="code">C2</span><span class="code">C3</span><span class="code">C4</span></span>
         </div>
         <h3>Relevance</h3>
-        <p class="lede">Whether the curriculum fits the place it lands. How participants rate it, how facilitators adapt it, and what is still missing.</p>
+        <p class="lede">Facilitators design flexible, tailored learning products that address specific local needs and challenges.</p>
         <div class="stats" id="s-relevance"></div>
         <span class="enter">Open Relevance →</span>
+      </article>
+
+      <article class="dcard d-sustainability" tabindex="0" role="button" data-domain="sustainability">
+        <div class="dcard-top">
+          <span class="eyebrow">Anchoring</span>
+          <span class="dcard-codes"><span class="code">S1</span><span class="code">S2</span><span class="code">S3</span><span class="code">S4</span><span class="code">S5</span><span class="code">S6</span></span>
+        </div>
+        <h3>Sustainability</h3>
+        <p class="lede">Knowledge and skills anchored in facilitators, their organizations and MSPs — influencing where change can be affected.</p>
+        <div class="stats" id="s-sustainability"></div>
+        <span class="enter">Open Sustainability →</span>
       </article>
     </div>
 
@@ -570,11 +570,13 @@ const DOMAIN = {
   relevance:      {name:'Relevance',      dim:'Contextualization', bg:'#393939', a:['#C9C4BC','#8A8580','#E2E0DF','#605C58','#F0EDE8','#A8A39C']}
 };
 
+/* Verbatim from the "ToT Dimension" column of the ToT Tracking & Learning
+   Framework, so the dashboard and the tracker say the same thing. */
 const BLURB = {
-  reach:'Trained facilitators at national (L1) and subnational (L2, L3) level, the trainings they deliver, the people they reach, and the projects and events carrying ToT content. Sources: the attendance registers (Tool 1) and the stocktaking survey (Tool 4).',
-  effectiveness:'Self-assessed capacity before and after the training, whether the ToT met the organization\u2019s needs, and the capacity-strengthening practices facilitators apply in their own rollouts. Sources: the pre and post assessments (Tools 2 and 3) and the stocktaking survey (Tool 4).',
-  sustainability:'Collaborative action, capacities used in day-to-day professional practice, facilitator retention and motivation, and the peer coaching that carries the learning forward. Sources: the stocktaking survey (Tool 4) and the coaching log (Tool 6).',
-  relevance:'How participants rate the curriculum against their own context, how facilitators localize it, and which capacities are still missing. Sources: the post-training assessment (Tool 3) and the stocktaking survey (Tool 4).'
+  reach: 'The ToT program is an efficient way to scale training efforts, reaching more people and multiplying impact by equipping trainers with local mandate and networks.',
+  effectiveness: 'The ToT program provides targeted capacity strengthening/sharing that supports the implementation of a country’s FST-NAP/Roadmap through technical and experiential learning contextualized to local realities, embedded in peer support and coaching.',
+  sustainability: 'The ToT helps ensure that knowledge and skills are anchored within the trained facilitators, their organizations and multi-stakeholder partnerships, and influence (sub)national institutions where change can be affected.',
+  relevance: 'Trained facilitators can design and create flexible, tailored learning products and modules that address specific local needs and challenges.',
 };
 
 /* ── State ───────────────────────────────────────────────────────────── */
