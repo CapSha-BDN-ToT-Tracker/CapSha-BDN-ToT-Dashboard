@@ -434,6 +434,7 @@ footer a{color:var(--reach);font-weight:500}
   </nav>
   <div class="source">
     <span class="pill demo" id="pill"><span class="dot"></span><span id="pill-text">Placeholder data</span></span>
+    <button class="ghost" id="mode-btn" hidden>Show example data</button>
     <button class="ghost" id="preview-btn">Preview a file</button>
     <input type="file" id="preview-input" accept=".xlsx,.xls,.csv" hidden>
   </div>
@@ -721,6 +722,7 @@ async function loadSheet(){
   }
 
   ROWS = rows;
+  LIVE = {rows, pill: null};
   const links = entries
     .filter(([name]) => loaded.includes(name))
     .map(([name, id]) => `<a href="https://docs.google.com/spreadsheets/d/${id}" target="_blank" rel="noopener">${name}</a>`)
@@ -728,9 +730,12 @@ async function loadSheet(){
   const el = document.getElementById('footer-links');
   if (el && links) el.innerHTML = ' Data sheets: ' + links;
 
-  setPill('live', failed.length
+  LIVE.pill = failed.length
     ? `Live · ${rows.length} figures · ${loaded.length}/${entries.length} countries (missing ${failed.join(', ')})`
-    : `Live · ${rows.length} figures · ${loaded.length} ${loaded.length===1?'country':'countries'}`);
+    : `Live · ${rows.length} figures · ${loaded.length} ${loaded.length===1?'country':'countries'}`;
+  setPill('live', LIVE.pill);
+  document.getElementById('mode-btn').hidden = false;
+  if (new URLSearchParams(location.search).has('demo')) return showExample();
   render();
 }
 
@@ -1594,6 +1599,26 @@ function DEMO(){ return DEMO_ROWS.map(r => ({...r, n: r.n ?? 0})); }
 // loadSheet() always finishes by calling render() exactly once — on the live
 // path, the demo path, and the error path alike — so there is no first-paint
 // race and no double render.
+/* Live <-> example data. The button appears once live data has loaded; a link
+   ending in ?demo opens straight in example mode. */
+let LIVE = null;
+function showExample(){
+  ROWS = DEMO();
+  setPill('demo', 'Example data (not real figures)');
+  document.getElementById('mode-btn').textContent = 'Back to live data';
+  render();
+}
+document.getElementById('mode-btn').onclick = () => {
+  if (!LIVE) return;
+  if (ROWS !== LIVE.rows){
+    ROWS = LIVE.rows;
+    setPill('live', LIVE.pill);
+    document.getElementById('mode-btn').textContent = 'Show example data';
+    return render();
+  }
+  showExample();
+};
+
 loadSheet();
 </script>
 </body>
