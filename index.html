@@ -588,7 +588,21 @@ const CHARTS = [];
 /* ═══════════════════════════════════════════════════════════════════════
    DATA
    ═══════════════════════════════════════════════════════════════════════ */
-const NUM = v => { const n = parseFloat(String(v ?? '').replace(/,/g,'').trim()); return isFinite(n) ? n : null; };
+/* Numbers can arrive in European notation (6,48 · 1.234,5) from a Dutch or other
+   European Google Sheet, or in English notation (6.48 · 1,234.5) from a local
+   .xlsx. The last separator in the number is the decimal one. */
+const NUM = v => {
+  if (typeof v === 'number') return isFinite(v) ? v : null;
+  let s = String(v ?? '').replace(/[\s %]/g, '');
+  if (!s) return null;
+  const c = s.lastIndexOf(','), d = s.lastIndexOf('.');
+  if (c > -1 && d > -1) s = c > d ? s.replace(/\./g, '').replace(',', '.')   // 1.234,5
+                                  : s.replace(/,/g, '');                      // 1,234.5
+  else if (c > -1) s = /^-?\d{1,3}(,\d{3}){2,}$/.test(s) ? s.replace(/,/g, '') // 1,234,567
+                                                       : s.replace(',', '.');  // 6,48
+  const n = Number(s);
+  return isFinite(n) ? n : null;
+};
 
 /* The tool sheets carry a title banner above the header row, so we cannot
    assume row 1 holds the column names — we go and find them. Works the same
@@ -658,7 +672,7 @@ async function fetchTab(id, tab){
   const csv = await res.text();
   // A sheet that isn't shared returns Google's sign-in page instead of CSV.
   if (/^\s*</.test(csv)) throw new Error('not shared (got a web page, not CSV)');
-  const wb  = XLSX.read(csv, {type:'string'});
+  const wb  = XLSX.read(csv, {type:'string', raw:true});   // keep '6,48' as text; NUM() reads it
   return normalize(toMatrix(wb.Sheets[wb.SheetNames[0]]), tab);
 }
 
