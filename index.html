@@ -652,10 +652,12 @@ const toMatrix = ws => XLSX.utils.sheet_to_json(ws, {header:1, defval:'', blankr
 
 async function fetchTab(id, tab){
   const url = `https://docs.google.com/spreadsheets/d/${id}`
-            + `/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(tab)}`;
+            + `/gviz/tq?tqx=out:csv&headers=1&sheet=${encodeURIComponent(tab)}`;
   const res = await fetch(url);
-  if (!res.ok) throw new Error(`${res.status}`);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const csv = await res.text();
+  // A sheet that isn't shared returns Google's sign-in page instead of CSV.
+  if (/^\s*</.test(csv)) throw new Error('not shared (got a web page, not CSV)');
   const wb  = XLSX.read(csv, {type:'string'});
   return normalize(toMatrix(wb.Sheets[wb.SheetNames[0]]), tab);
 }
@@ -664,9 +666,16 @@ async function fetchTab(id, tab){
    from the config, so a mislabelled Country cell in the sheet cannot make one
    country's data show up under another. */
 async function loadCountry(name, id){
+  const errors = [];
   const per = await Promise.all(CONFIG.TABS.map(tab =>
-    fetchTab(id, tab).catch(() => [])          // a missing tab is not fatal
+    fetchTab(id, tab).catch(err => {           // a missing tab is not fatal
+      errors.push(tab);
+      console.warn(`[dashboard] ${name} · ${tab}: ${err.message || err}`);
+      return [];
+    })
   ));
+  // Every tab failing means the sheet itself can't be read (usually sharing).
+  if (errors.length === CONFIG.TABS.length) throw new Error('unreadable');
   return per.flat().map(r => ({...r, country: name}));
 }
 
@@ -692,7 +701,7 @@ async function loadSheet(){
   if (!rows.length){
     ROWS = DEMO();
     setPill(failed.length ? 'error' : 'demo',
-      failed.length ? `Could not reach: ${failed.join(', ')}, showing placeholders`
+      failed.length ? `Could not read: ${failed.join(', ')} (check link sharing), showing placeholders`
                     : 'Sheets reachable, no data yet');
     return render();
   }
